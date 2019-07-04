@@ -1,0 +1,38 @@
+body
+{
+	/* Background pattern from Toptal Subtle Patterns */
+	background-image: url("../img/nasty_fabric.png");
+}
+
+.container
+{
+	margin-top:20px;
+}
+
+.nav-item
+{
+	height:80px;
+	width:50%;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.nav-link
+{
+	background-color: #747474;
+	height:100%;
+	color:white;
+}
+.nav-link:hover
+{
+	background-color: #636363;
+	color:white;
+}
+
+ .nav-link.active
+{
+	background-color: #53916b !important;
+}
+.tab-content
+{
+
+}
