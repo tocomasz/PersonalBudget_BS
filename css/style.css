@@ -2,25 +2,35 @@ body
 {
 	/* Background pattern from Toptal Subtle Patterns */
 	background-image: url("../img/nasty_fabric.png");
+	
 }
 
 .container
 {
-	margin-top:20px;
+	margin-top:40px;
+}
+
+.fa
+{
+	font-size:30px;
 }
 
 .nav-item
 {
-	height:80px;
-	width:50%;
+	height:120px;
+	width:75%;
 	text-align: center;
 	margin-bottom: 10px;
+	text-transform: lowercase;
+	font-size:15px;
 }
 .nav-link
 {
+
 	background-color: #747474;
 	height:100%;
 	color:white;
+		border: 1px solid black;
 }
 .nav-link:hover
 {
