@@ -16,6 +16,24 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 		
+		<script>
+		$(document).ready(function(){
+		  $("#datePeriod").change(function(){
+		  if(this.value=="niestandardowy"){
+			$("#customPeriod").modal({backdrop: "static"});
+			};
+		  });
+		});
+		
+		$(document).ready(function(){
+		  $("#modalClose").click(function(){
+		 	$("#datePeriod").val("przedzial");
+		  });
+		});
+		
+		
+		</script>
+		
 	  </head>
 	  
 	  <body>
@@ -173,12 +191,12 @@
 									<div class="form-group  row">
 										<label for="datePeriod" class="col-sm-4 col-form-label">Przedział bilansu</label>
 										<div class="col-sm-8">
-											<select name="datePeriod" class="custom-select">
-												<option selected>Przedział bilansu</option>
+											<select name="datePeriod" class="custom-select" id="datePeriod">
+												<option selected value="przedzial">Przedział bilansu</option>
 												<option value="biezacy">Bieżący miesiąc</option>
 												<option value="poprzedni">Poprzedni miesiąc</option>
 												<option value="rok">Bieżący rok</option>
-												<option value="niestandardowy" data-toggle="modal" data-target="#customPeriod">Niestandardowy</option>
+												<option value="niestandardowy">Niestandardowy</option>
 											</select>
 										</div>
 									</div>
@@ -190,7 +208,7 @@
 										  <!-- Modal Header -->
 										  <div class="modal-header">
 											<h4 class="modal-title">Modal Heading</h4>
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<button type="button" class="close" data-dismiss="modal" id="modalClose">&times;</button>
 										  </div>
 
 										  <!-- Modal body -->
