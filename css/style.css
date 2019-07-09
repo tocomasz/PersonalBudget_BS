@@ -42,7 +42,7 @@ body
 {
 	background-color: #53916b !important;
 }
-.tab-content
-{
 
-}
+  .modal-header, .close{
+
+  }

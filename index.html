@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="pl">
-	  <head>
+	<head>
 	  
 		<meta charset="utf-8"/> 
 		<title>Budżet personalny</title>
@@ -18,25 +18,24 @@
 		
 		<script>
 		$(document).ready(function(){
-		  $("#datePeriod").change(function(){
-		  if(this.value=="niestandardowy"){
-			$("#customPeriod").modal({backdrop: "static"});
-			};
-		  });
+			$("#datePeriod").change(function(){
+				if(this.value=="niestandardowy"){
+					$("#customPeriod").modal({backdrop: "static"});
+				};
+			});
 		});
 		
 		$(document).ready(function(){
-		  $("#modalClose").click(function(){
-		 	$("#datePeriod").val("przedzial");
-		  });
+			$("#modalClose").click(function(){
+				$("#datePeriod").val("przedzial");
+			});
 		});
-		
 		
 		</script>
 		
-	  </head>
+	 </head>
 	  
-	  <body>
+	 <body>
 	  
 		<div class="container">
 			<div class="row">
@@ -87,6 +86,12 @@
 					<div class="col-8 bg-light rounded-lg shadow-lg">
 					
 						<div class="tab-content">
+						
+							<div class="tab-pane container active" id="main" >
+								<h1 class="display2 text-center">Prowadzenie budżetu osobistego</h1><hr>
+								<p> Witaj!</p>
+								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tellus sed velit suscipit accumsan. Integer ultricies, erat a porta auctor, ex quam pellentesque sem, eget porta odio felis non justo. Ut vulputate iaculis erat et efficitur. Ut vel mauris sit amet diam fermentum malesuada. Duis condimentum, mi vitae tempus pellentesque, dui neque condimentum nunc, sed blandit mi eros nec velit. Pellentesque vitae tempus ante. Pellentesque feugiat erat vitae odio mollis, vitae dapibus magna condimentum. Aliquam lacus leo, tempus vitae finibus ut, suscipit sit amet nulla. In interdum dui augue, ut bibendum tortor tincidunt non. Aenean at turpis lacinia, blandit ligula id, blandit nisi. Aliquam molestie risus erat, eu pretium tellus porta ac. Vivamus a suscipit enim. Suspendisse vitae consequat tortor. Suspendisse egestas interdum pulvinar. Donec placerat, turpis dapibus hendrerit tempus, est ex efficitur felis, sit amet rutrum urna lacus at dui.</p>
+							</div>
 						
 							<div class="tab-pane container fade" id="income">
 								
@@ -200,25 +205,7 @@
 											</select>
 										</div>
 									</div>
-									
-									<div class="modal" id="customPeriod">
-									  <div class="modal-dialog">
-										<div class="modal-content">
-
-										  <!-- Modal Header -->
-										  <div class="modal-header">
-											<h4 class="modal-title">Modal Heading</h4>
-											<button type="button" class="close" data-dismiss="modal" id="modalClose">&times;</button>
-										  </div>
-
-										  <!-- Modal body -->
-										  <div class="modal-body">
-											Modal body..
-										  </div>	
-										</div>
-									</div>
-								</div>
-								
+																	
 								</form>
 							</div>
 							<div class="tab-pane container fade" id="settings">
@@ -227,13 +214,47 @@
 							<div class="tab-pane container fade" id="logout">
 								5
 							</div>
-
 						</div>
-						
 					</div>
-					
-					
 			</div>
+			
+			 <!-- Modal for custom dates -->
+			<div class="modal fade" id="customPeriod">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+					
+						<div class="modal-header">
+							<h4 class="modal-title">Wybierz zakres dat</h4>
+							<button type="button" class="close" data-dismiss="modal" id="modalClose">&times;</button>
+						</div>
+
+						<div class="modal-body">
+						
+							<form>
+								<div class="form-group row">
+									<label for="startDate" class="col-sm-5 col-form-label">Data początkowa</label>
+									<div class="col-sm-7">
+										<input type="date" class="form-control" id="startDate">
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<label for="endDate" class="col-sm-5 col-form-label">Data końcowa</label>
+									<div class="col-sm-7">
+										<input type="date" class="form-control" id="endDate">
+									</div>
+								</div>
+								<button type="submit" class="btn btn-outline-secondary float-right">Wybierz</button>
+								
+							</form>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
 		</div>
 		
 	  </body>
