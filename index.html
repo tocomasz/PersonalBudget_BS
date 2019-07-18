@@ -41,10 +41,102 @@
 				<a class="navbar-brand" href="index.html"><i class="fas fa-piggy-bank"></i></a>
 			</ul>
 			<ul class="navbar-nav ml-auto">
-				<button class="btn btn-secondary ml-auto mr-2 " data-toggle="loginModal"> Zaloguj się</button>
-				<button class="btn btn-secondary ml-auto mr-5" data-toggle="loginModal"> Zarejestruj się</button>
+				<button class="btn btn-secondary ml-auto mr-2 " data-toggle="modal" data-target="#loginModal"> Zaloguj się</button>
+				<button class="btn btn-secondary ml-auto mr-5" data-toggle="modal" data-target="#loginModal"> Zarejestruj się</button>
 			</ul>
 		</nav>
+		
+		 <!-- Modal for login/register -->
+		<div class="modal fade" id="loginModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+				
+					<div class="modal-header">
+					
+						<ul class="nav nav-pills">
+						
+							<li class="nav-item">
+								<a class="nav-link active" data-toggle="pill" href="#login">
+								<h4>Logowanie</h4>
+								</a>
+							</li>
+							
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="pill" href="#register">
+								<h4>Rejestracja</h4>
+								</a>
+							</li>
+							
+						</ul>
+						
+						<button type="button" class="close" data-dismiss="modal" id="modalClose">&times;</button>
+					</div>
+
+					<div class="modal-body mx-3">
+						<div class="tab-content">
+						
+							<div class="tab-pane container active" id="login">
+								<form>
+									<div class="form-group row">
+										<label for="login" class="col-sm-5 col-form-label">Login</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control" id="login">
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label for="password" class="col-sm-5 col-form-label">Hasło</label>
+										<div class="col-sm-7">
+											<input type="password" class="form-control" id="password">
+										</div>
+									</div>
+									<button type="submit" class="btn btn-outline-secondary float-right">Zaloguj się</button>
+									
+								</form>
+							</div>
+							
+							<div class="tab-pane container fade" id="register">
+								<form>
+									<div class="form-group row">
+										<label for="login" class="col-sm-5 col-form-label">Imię</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control" id="name">
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label for="email" class="col-sm-5 col-form-label">Adres email</label>
+										<div class="col-sm-7">
+											<input type="email" class="form-control" id="email">
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label for="login" class="col-sm-5 col-form-label">Login</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control" id="login">
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label for="password" class="col-sm-5 col-form-label">Hasło</label>
+										<div class="col-sm-7">
+											<input type="password" class="form-control" id="password">
+										</div>
+									</div>
+									
+									<button type="submit" class="btn btn-outline-secondary float-right">Załóż konto</button>
+									
+								</form>
+							</div>
+							
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
 		
 		
 		<div class="container mt-4">
