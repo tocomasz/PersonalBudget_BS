@@ -31,13 +31,128 @@
 			});
 		});
 		
+		$(document).ready(function(){
+			$("#changeTabToLogin").click(function(){
+				$("#loginModal").modal({backdrop: "static"});
+				$('.nav-pills a[href="#login"]').tab('show')
+			});
+		});
+		
+		$(document).ready(function(){
+			$("#changeTabToRegister").click(function(){
+				$("#loginModal").modal({backdrop: "static"});
+				$('.nav-pills a[href="#register"]').tab('show')
+			});
+		});
+		
 		</script>
 		
 	 </head>
 	  
 	 <body>
-	  
-		<div class="container">
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<ul class="navbar-nav mr-auto ml-5">
+				<a class="navbar-brand" href="index.html"><i class="fas fa-piggy-bank"></i></a>
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				<button class="btn btn-secondary ml-auto mr-2" id="changeTabToLogin"> Zaloguj się</button>
+				<button class="btn btn-secondary ml-auto mr-5" id="changeTabToRegister"> Zarejestruj się</button>
+			</ul>
+		</nav>
+		
+		 <!-- Modal for login/register -->
+		<div class="modal fade" id="loginModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+					<div class="modal-header">
+					
+						<ul class="nav nav-pills">
+						
+							<li class="nav-item">
+								<a class="nav-link active" data-toggle="pill" href="#login">
+								<i class="fas fa-user mr-1"></i>Logowanie
+								</a>
+							</li>
+							
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="pill" href="#register">
+								<i class="fas fa-user-plus mr-1"></i>Rejestracja
+								</a>
+							</li>
+							
+						</ul>
+						
+						<button type="button" class="close" data-dismiss="modal" id="modalClose">&times;</button>
+					</div>
+
+					<div class="modal-body mx-3">
+						<div class="tab-content">
+						
+							<div class="tab-pane container active" id="login">
+								<form>
+									<div class="form-group row">
+										<label for="login" class="col-sm-5 col-form-label">Login</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control" id="login">
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label for="password" class="col-sm-5 col-form-label">Hasło</label>
+										<div class="col-sm-7">
+											<input type="password" class="form-control" id="password">
+										</div>
+									</div>
+									<button type="submit" class="btn btn-outline-secondary float-right">Zaloguj się</button>
+									
+								</form>
+							</div>
+							
+							<div class="tab-pane container fade" id="register">
+								<form>
+									<div class="form-group row">
+										<label for="login" class="col-sm-5 col-form-label">Imię</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control" id="name">
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label for="email" class="col-sm-5 col-form-label">Adres email</label>
+										<div class="col-sm-7">
+											<input type="email" class="form-control" id="email">
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label for="login" class="col-sm-5 col-form-label">Login</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control" id="login">
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label for="password" class="col-sm-5 col-form-label">Hasło</label>
+										<div class="col-sm-7">
+											<input type="password" class="form-control" id="password">
+										</div>
+									</div>
+									
+									<button type="submit" class="btn btn-outline-secondary float-right">Załóż konto</button>
+									
+								</form>
+							</div>
+							
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="container mt-4">
 			<div class="row">
 			
 				<nav class="col-4">
@@ -83,7 +198,7 @@
 					
 				</nav>
 			
-					<div class="col-8 bg-light rounded-lg shadow-lg">
+					<div class="col-8 bg-light rounded-lg shadow-lg pt-4">
 					
 						<div class="tab-content">
 						

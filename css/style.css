@@ -5,17 +5,7 @@ body
 	
 }
 
-.container
-{
-	margin-top:40px;
-}
-
-.fa
-{
-	font-size:30px;
-}
-
-.nav-item
+.container .nav-item
 {
 	height:120px;
 	width:75%;
@@ -24,25 +14,34 @@ body
 	text-transform: lowercase;
 	font-size:15px;
 }
-.nav-link
+.container .nav-link
 {
 
 	background-color: #747474;
 	height:100%;
 	color:white;
-		border: 1px solid black;
+	border: 1px solid black;
 }
-.nav-link:hover
+.container .nav-link:hover
 {
 	background-color: #636363;
 	color:white;
 }
 
- .nav-link.active
+ .container .nav-link.active
 {
 	background-color: #53916b !important;
 }
 
-  .modal-header, .close{
+#loginModal .nav-link
+{
+	background-color: white;
+	color:black;
+}
 
-  }
+#loginModal .nav-link.active
+{
+	background-color: #747474 !important;
+	color:white;
+}
+
