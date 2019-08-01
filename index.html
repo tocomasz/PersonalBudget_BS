@@ -34,14 +34,14 @@
 		$(document).ready(function(){
 			$("#changeTabToLogin").click(function(){
 				$("#loginModal").modal({backdrop: "static"});
-				$('.nav-pills a[href="#login"]').tab('show')
+				$('.nav-pills a[href="#loginTab"]').tab('show')
 			});
 		});
 		
 		$(document).ready(function(){
 			$("#changeTabToRegister").click(function(){
 				$("#loginModal").modal({backdrop: "static"});
-				$('.nav-pills a[href="#register"]').tab('show')
+				$('.nav-pills a[href="#registerTab"]').tab('show')
 			});
 		});
 		
@@ -51,12 +51,15 @@
 	  
 	 <body>
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-			<ul class="navbar-nav mr-auto ml-5">
-				<a class="navbar-brand" href="index.html"><i class="fas fa-piggy-bank"></i></a>
-			</ul>
+			<a class="navbar-brand mr-auto ml-5" href="index.html"><i class="fas fa-piggy-bank"></i></a>
+			
 			<ul class="navbar-nav ml-auto">
-				<button class="btn btn-secondary ml-auto mr-2" id="changeTabToLogin"> Zaloguj się</button>
-				<button class="btn btn-secondary ml-auto mr-5" id="changeTabToRegister"> Zarejestruj się</button>
+				<li>
+					<button class="btn btn-secondary ml-auto mr-2" id="changeTabToLogin"> Zaloguj się</button>
+				</li>
+				<li>
+					<button class="btn btn-secondary ml-auto mr-5" id="changeTabToRegister"> Zarejestruj się</button>
+				</li>
 			</ul>
 		</nav>
 		
@@ -70,13 +73,13 @@
 						<ul class="nav nav-pills">
 						
 							<li class="nav-item">
-								<a class="nav-link active" data-toggle="pill" href="#login">
+								<a class="nav-link active" data-toggle="pill" href="#loginTab">
 								<i class="fas fa-user mr-1"></i>Logowanie
 								</a>
 							</li>
 							
 							<li class="nav-item">
-								<a class="nav-link" data-toggle="pill" href="#register">
+								<a class="nav-link" data-toggle="pill" href="#registerTab">
 								<i class="fas fa-user-plus mr-1"></i>Rejestracja
 								</a>
 							</li>
@@ -89,19 +92,19 @@
 					<div class="modal-body mx-3">
 						<div class="tab-content">
 						
-							<div class="tab-pane container active" id="login">
+							<div class="tab-pane container active" id="loginTab">
 								<form>
 									<div class="form-group row">
-										<label for="login" class="col-sm-5 col-form-label">Login</label>
+										<label for="loginTabLogin" class="col-sm-5 col-form-label">Login</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" id="login">
+											<input type="text" class="form-control" id="loginTabLogin">
 										</div>
 									</div>
 									
 									<div class="form-group row">
-										<label for="password" class="col-sm-5 col-form-label">Hasło</label>
+										<label for="loginTabPassword" class="col-sm-5 col-form-label">Hasło</label>
 										<div class="col-sm-7">
-											<input type="password" class="form-control" id="password">
+											<input type="password" class="form-control" id="loginTabPassword">
 										</div>
 									</div>
 									<button type="submit" class="btn btn-outline-secondary float-right">Zaloguj się</button>
@@ -109,33 +112,33 @@
 								</form>
 							</div>
 							
-							<div class="tab-pane container fade" id="register">
+							<div class="tab-pane container fade" id="registerTab">
 								<form>
 									<div class="form-group row">
-										<label for="login" class="col-sm-5 col-form-label">Imię</label>
+										<label for="registerTabName" class="col-sm-5 col-form-label">Imię</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" id="name">
+											<input type="text" class="form-control" id="registerTabName">
 										</div>
 									</div>
 									
 									<div class="form-group row">
-										<label for="email" class="col-sm-5 col-form-label">Adres email</label>
+										<label for="registerTabEmail" class="col-sm-5 col-form-label">Adres email</label>
 										<div class="col-sm-7">
-											<input type="email" class="form-control" id="email">
+											<input type="email" class="form-control" id="registerTabEmail">
 										</div>
 									</div>
 									
 									<div class="form-group row">
-										<label for="login" class="col-sm-5 col-form-label">Login</label>
+										<label for="registerTabLogin" class="col-sm-5 col-form-label">Login</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" id="login">
+											<input type="text" class="form-control" id="registerTabLogin">
 										</div>
 									</div>
 									
 									<div class="form-group row">
-										<label for="password" class="col-sm-5 col-form-label">Hasło</label>
+										<label for="registerTabPassword" class="col-sm-5 col-form-label">Hasło</label>
 										<div class="col-sm-7">
-											<input type="password" class="form-control" id="password">
+											<input type="password" class="form-control" id="registerTabPassword">
 										</div>
 									</div>
 									
@@ -161,35 +164,35 @@
 					
 						<li class="nav-item">
 							<a class="nav-link" data-toggle="pill" href="#income">
-								<h1><i class="fas fa-plus-square"></i></h1>
+								<p><i class="fas fa-plus-square fa-3x"></i><p>
 								<p>Dodaj przychód</p>
 							</a>
 						</li>
 						
 						<li class="nav-item">
 							<a class="nav-link" data-toggle="pill" href="#expense">
-								<h1><i class="fas fa-minus-square"></i></h1>
+								<p><i class="fas fa-minus-square fa-3x"></i></p>
 								<p>Dodaj wydatek</p>
 							</a>
 						</li>
 						
 						<li class="nav-item">
 							<a class="nav-link" data-toggle="pill" href="#balance">
-								<h1><i class="fas fa-search-dollar"></i></h1>
+								<p><i class="fas fa-search-dollar fa-3x"></i></p>
 								<p>Przeglądaj bilans</p>
 							</a>
 						</li>
 						
 						<li class="nav-item">
 							<a class="nav-link" data-toggle="pill" href="#settings">
-								<h1><i class="fas fa-cog"></i></h1>
+								<p><i class="fas fa-cog fa-3x"></i></p>
 								<p>Ustawienia</p>
 							</a>
 						</li>
 						
 						<li class="nav-item">
 							<a class="nav-link" data-toggle="pill" href="#logout">
-								<h1><i class="fas fa-sign-out-alt"></i></h1>
+								<p><i class="fas fa-sign-out-alt fa-3x"></i></p>
 								<p>Wyloguj się</p>
 							</a>
 						</li>								
@@ -230,7 +233,7 @@
 									<div class="form-group  row">
 										<label for="incomeCategory" class="col-sm-4 col-form-label">Kategoria</label>
 										<div class="col-sm-8">
-											<select name="incomeCategory" class="custom-select">
+											<select id="incomeCategory" class="custom-select">
 												<option selected> Kategoria</option>
 												<option value="wynagrodzenie">Wynagrodzenie</option>
 												<option value="odsetki">Odsetki bankowe</option>
@@ -269,7 +272,7 @@
 									<div class="form-group  row">
 										<label for="expenseForm" class="col-sm-4 col-form-label">Rodzaj płatności</label>
 										<div class="col-sm-8">
-											<select name="expenseForm" class="custom-select">
+											<select id="expenseForm" class="custom-select">
 												<option selected>Rodzaj płatności</option>
 												<option value="gotowka">Gotówka</option>
 												<option value="debetowa">Karta debetowa</option>
@@ -281,7 +284,7 @@
 									<div class="form-group  row">
 										<label for="expenseCategory" class="col-sm-4 col-form-label">Kategoria</label>
 										<div class="col-sm-8">
-											<select name="expenseCategory" class="custom-select">
+											<select id="expenseCategory" class="custom-select">
 												<option selected> Kategoria</option>
 												  <option value="jedzenie">Jedzenie</option>
 												  <option value="mieszkanie">Mieszkanie</option>
