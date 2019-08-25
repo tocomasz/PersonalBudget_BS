@@ -1,3 +1,77 @@
+<?php
+	session_start();
+	if(isset($_POST['registerTabLogin']))
+	{
+		$all_ok=true;
+		
+		$password = $_POST['registerTabPassword'];
+		$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+		
+		$login = $_POST['registerTabLogin'];
+		$name =$_POST['registerTabName'];
+		
+		//Email validation
+		$email = $_POST['registerTabEmail'];
+		$emailS = filter_var($email, FILTER_SANITIZE_EMAIL);
+		if((filter_var($emailS, FILTER_VALIDATE_EMAIL)==false) || ($emailS != $email))
+		{
+			$all_ok = false;
+			$_SESSION['e_register_email'] = "Podany adres email jest niepoprawny";
+		}
+
+		//Nick/Email taken validation
+		require_once "connect.php";
+		mysqli_report(MYSQLI_REPORT_STRICT);
+		try
+		{
+			$connection = new mysqli($host, $db_user, $db_password, $db_name);
+			if($connection->connect_errno!=0)
+			{
+				throw new Exception(mysqli_connect_errno());
+			}
+			else
+			{
+				$result= $connection->query("SELECT id FROM users WHERE email='$email'");
+				if(!$result) throw new Exception($connection->error);
+				$howManyEmails = $result->num_rows;
+				if($howManyEmails>0)
+				{
+					$all_ok=false;
+					$_SESSION['e_register_email'] = "Istnieje już konto przypisane do tego emaila";
+				}
+				
+				$result= $connection->query("SELECT id FROM users WHERE login='$login'");
+				if(!$result) throw new Exception($connection->error);
+				$howManyUsers = $result->num_rows;
+				if($howManyUsers>0)
+				{
+					$all_ok=false;
+					$_SESSION['e_register_login'] = "Istnieje już konto o takim loginie";
+				}
+
+				if($all_ok)
+				{
+					if($connection->query("INSERT INTO users VALUES (NULL, '$login', '$hashedPassword', '$email', '$name')"))
+					{
+						$_SESSION['registerSuccess']=true;
+					}
+					else
+					{
+						throw new Exception($connection->error);
+					}
+				}
+				
+				$connection->close();
+			}
+		}
+		catch(Exception $e)
+		{
+			echo "Błąd serwera! Przepraszamy";
+		}
+	}
+	
+?>
+
 <!DOCTYPE HTML>
 <html lang="pl">
 	<head>
@@ -51,7 +125,7 @@
 	  
 	 <body>
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-			<a class="navbar-brand mr-auto ml-5" href="index.html"><i class="fas fa-piggy-bank"></i></a>
+			<a class="navbar-brand mr-auto ml-5" href="index.php"><i class="fas fa-piggy-bank"></i></a>
 			
 			<ul class="navbar-nav ml-auto">
 				<li>
@@ -113,32 +187,47 @@
 							</div>
 							
 							<div class="tab-pane container fade" id="registerTab">
-								<form>
+								<form method="post">
 									<div class="form-group row">
 										<label for="registerTabName" class="col-sm-5 col-form-label">Imię</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" id="registerTabName">
+											<input type="text" class="form-control" id="registerTabName" name="registerTabName" minlength="1" maxlength="20" required pattern="^[a-zA-Z0-9 ]+$" title="Akceptowane są tylko litery i cyfry">
 										</div>
+
 									</div>
 									
 									<div class="form-group row">
 										<label for="registerTabEmail" class="col-sm-5 col-form-label">Adres email</label>
 										<div class="col-sm-7">
-											<input type="email" class="form-control" id="registerTabEmail">
+											<input type="email" class="form-control" id="registerTabEmail" name="registerTabEmail" required>
+										<?php
+											if(isset($_SESSION['e_register_email']))
+											{
+												echo '<small class="text-danger">'.$_SESSION['e_register_email']."</small>";
+												unset($_SESSION['e_register_email']);
+											}
+										?>
 										</div>
 									</div>
 									
 									<div class="form-group row">
 										<label for="registerTabLogin" class="col-sm-5 col-form-label">Login</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" id="registerTabLogin">
+											<input type="text" class="form-control" id="registerTabLogin" name="registerTabLogin" minlength="3" maxlength="20" required pattern="^[a-zA-Z0-9 ]+$" title="Akceptowane są tylko litery i cyfry">
+										<?php
+											if(isset($_SESSION['e_register_login']))
+											{
+												echo '<small class="text-danger">'.$_SESSION['e_register_login']."</small>";
+												unset($_SESSION['e_register_login']);
+											}
+										?>
 										</div>
 									</div>
 									
 									<div class="form-group row">
 										<label for="registerTabPassword" class="col-sm-5 col-form-label">Hasło</label>
 										<div class="col-sm-7">
-											<input type="password" class="form-control" id="registerTabPassword">
+											<input type="password" class="form-control" id="registerTabPassword"  name="registerTabPassword" minlength="5" maxlength="20" required>
 										</div>
 									</div>
 									
