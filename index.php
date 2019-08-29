@@ -1,77 +1,3 @@
-<?php
-	session_start();
-	if(isset($_POST['registerTabLogin']))
-	{
-		$all_ok=true;
-		
-		$password = $_POST['registerTabPassword'];
-		$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-		
-		$login = $_POST['registerTabLogin'];
-		$name =$_POST['registerTabName'];
-		
-		//Email validation
-		$email = $_POST['registerTabEmail'];
-		$emailS = filter_var($email, FILTER_SANITIZE_EMAIL);
-		if((filter_var($emailS, FILTER_VALIDATE_EMAIL)==false) || ($emailS != $email))
-		{
-			$all_ok = false;
-			$_SESSION['e_register_email'] = "Podany adres email jest niepoprawny";
-		}
-
-		//Nick/Email taken validation
-		require_once "connect.php";
-		mysqli_report(MYSQLI_REPORT_STRICT);
-		try
-		{
-			$connection = new mysqli($host, $db_user, $db_password, $db_name);
-			if($connection->connect_errno!=0)
-			{
-				throw new Exception(mysqli_connect_errno());
-			}
-			else
-			{
-				$result= $connection->query("SELECT id FROM users WHERE email='$email'");
-				if(!$result) throw new Exception($connection->error);
-				$howManyEmails = $result->num_rows;
-				if($howManyEmails>0)
-				{
-					$all_ok=false;
-					$_SESSION['e_register_email'] = "Istnieje już konto przypisane do tego emaila";
-				}
-				
-				$result= $connection->query("SELECT id FROM users WHERE login='$login'");
-				if(!$result) throw new Exception($connection->error);
-				$howManyUsers = $result->num_rows;
-				if($howManyUsers>0)
-				{
-					$all_ok=false;
-					$_SESSION['e_register_login'] = "Istnieje już konto o takim loginie";
-				}
-
-				if($all_ok)
-				{
-					if($connection->query("INSERT INTO users VALUES (NULL, '$login', '$hashedPassword', '$email', '$name')"))
-					{
-						$_SESSION['registerSuccess']=true;
-					}
-					else
-					{
-						throw new Exception($connection->error);
-					}
-				}
-				
-				$connection->close();
-			}
-		}
-		catch(Exception $e)
-		{
-			echo "Błąd serwera! Przepraszamy";
-		}
-	}
-	
-?>
-
 <!DOCTYPE HTML>
 <html lang="pl">
 	<head>
@@ -118,6 +44,23 @@
 				$('.nav-pills a[href="#registerTab"]').tab('show')
 			});
 		});
+		
+		$(document).ready(function(){
+			$("#registerForm").submit(function(event){
+				event.preventDefault();
+				var registerTabName = $("#registerTabName").val();
+				var registerTabEmail = $("#registerTabEmail").val();
+				var registerTabLogin = $("#registerTabLogin").val();
+				var registerTabPassword = $("#registerTabPassword").val();
+				$("#registerFormMessage").load("register.php", {
+					registerTabName: registerTabName,
+					registerTabEmail: registerTabEmail,
+					registerTabLogin: registerTabLogin,
+					registerTabPassword: registerTabPassword
+				});
+			});
+		});
+		
 		
 		</script>
 		
@@ -187,11 +130,12 @@
 							</div>
 							
 							<div class="tab-pane container fade" id="registerTab">
-								<form method="post">
+								<form id ="registerForm" action="register.php" method="post" novalidate>
 									<div class="form-group row">
 										<label for="registerTabName" class="col-sm-5 col-form-label">Imię</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" id="registerTabName" name="registerTabName" minlength="1" maxlength="20" required pattern="^[a-zA-Z0-9 ]+$" title="Akceptowane są tylko litery i cyfry">
+											<input type="text" class="form-control" id="registerTabName" name="registerTabName" >
+											<small class = "text-danger" id="registerTabNameFeedback"></small>
 										</div>
 
 									</div>
@@ -199,38 +143,27 @@
 									<div class="form-group row">
 										<label for="registerTabEmail" class="col-sm-5 col-form-label">Adres email</label>
 										<div class="col-sm-7">
-											<input type="email" class="form-control" id="registerTabEmail" name="registerTabEmail" required>
-										<?php
-											if(isset($_SESSION['e_register_email']))
-											{
-												echo '<small class="text-danger">'.$_SESSION['e_register_email']."</small>";
-												unset($_SESSION['e_register_email']);
-											}
-										?>
+											<input type="email" class="form-control" id="registerTabEmail" name="registerTabEmail">
+											<small class = "text-danger" id="registerTabEmailFeedback"></small>
 										</div>
 									</div>
 									
 									<div class="form-group row">
 										<label for="registerTabLogin" class="col-sm-5 col-form-label">Login</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" id="registerTabLogin" name="registerTabLogin" minlength="3" maxlength="20" required pattern="^[a-zA-Z0-9 ]+$" title="Akceptowane są tylko litery i cyfry">
-										<?php
-											if(isset($_SESSION['e_register_login']))
-											{
-												echo '<small class="text-danger">'.$_SESSION['e_register_login']."</small>";
-												unset($_SESSION['e_register_login']);
-											}
-										?>
+											<input type="text" class="form-control" id="registerTabLogin" name="registerTabLogin">
+											<small class = "text-danger" id="registerTabLoginFeedback"></small>
 										</div>
 									</div>
 									
 									<div class="form-group row">
 										<label for="registerTabPassword" class="col-sm-5 col-form-label">Hasło</label>
 										<div class="col-sm-7">
-											<input type="password" class="form-control" id="registerTabPassword"  name="registerTabPassword" minlength="5" maxlength="20" required>
+											<input type="password" class="form-control" id="registerTabPassword"  name="registerTabPassword">
+											<small class = "text-danger" id="registerTabPasswordFeedback"></small>
 										</div>
 									</div>
-									
+									<div id="registerFormMessage"></div>
 									<button type="submit" class="btn btn-outline-secondary float-right">Załóż konto</button>
 									
 								</form>
