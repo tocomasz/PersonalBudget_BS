@@ -45,13 +45,30 @@
 			});
 		});
 		
+		$(document).ready(function(){
+			$("#registerForm").submit(function(event){
+				event.preventDefault();
+				var registerTabName = $("#registerTabName").val();
+				var registerTabEmail = $("#registerTabEmail").val();
+				var registerTabLogin = $("#registerTabLogin").val();
+				var registerTabPassword = $("#registerTabPassword").val();
+				$("#registerFormMessage").load("register.php", {
+					registerTabName: registerTabName,
+					registerTabEmail: registerTabEmail,
+					registerTabLogin: registerTabLogin,
+					registerTabPassword: registerTabPassword
+				});
+			});
+		});
+		
+		
 		</script>
 		
 	 </head>
 	  
 	 <body>
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-			<a class="navbar-brand mr-auto ml-5" href="index.html"><i class="fas fa-piggy-bank"></i></a>
+			<a class="navbar-brand mr-auto ml-5" href="index.php"><i class="fas fa-piggy-bank"></i></a>
 			
 			<ul class="navbar-nav ml-auto">
 				<li>
@@ -113,35 +130,40 @@
 							</div>
 							
 							<div class="tab-pane container fade" id="registerTab">
-								<form>
+								<form id ="registerForm" action="register.php" method="post" novalidate>
 									<div class="form-group row">
 										<label for="registerTabName" class="col-sm-5 col-form-label">Imię</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" id="registerTabName">
+											<input type="text" class="form-control" id="registerTabName" name="registerTabName" >
+											<small class = "text-danger" id="registerTabNameFeedback"></small>
 										</div>
+
 									</div>
 									
 									<div class="form-group row">
 										<label for="registerTabEmail" class="col-sm-5 col-form-label">Adres email</label>
 										<div class="col-sm-7">
-											<input type="email" class="form-control" id="registerTabEmail">
+											<input type="email" class="form-control" id="registerTabEmail" name="registerTabEmail">
+											<small class = "text-danger" id="registerTabEmailFeedback"></small>
 										</div>
 									</div>
 									
 									<div class="form-group row">
 										<label for="registerTabLogin" class="col-sm-5 col-form-label">Login</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" id="registerTabLogin">
+											<input type="text" class="form-control" id="registerTabLogin" name="registerTabLogin">
+											<small class = "text-danger" id="registerTabLoginFeedback"></small>
 										</div>
 									</div>
 									
 									<div class="form-group row">
 										<label for="registerTabPassword" class="col-sm-5 col-form-label">Hasło</label>
 										<div class="col-sm-7">
-											<input type="password" class="form-control" id="registerTabPassword">
+											<input type="password" class="form-control" id="registerTabPassword"  name="registerTabPassword">
+											<small class = "text-danger" id="registerTabPasswordFeedback"></small>
 										</div>
 									</div>
-									
+									<div id="registerFormMessage"></div>
 									<button type="submit" class="btn btn-outline-secondary float-right">Załóż konto</button>
 									
 								</form>
