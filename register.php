@@ -89,6 +89,12 @@
 					if($connection->query("INSERT INTO users VALUES (NULL, '$login', '$hashedPassword', '$email', '$name')"))
 					{
 						echo "Konto zostało utworzone, przejdź do zakładki logowania aby się zalogować";
+						$result = $connection->query("SELECT id FROM users WHERE login='$login'");
+						$row = $result->fetch_assoc();
+						$userID = $row['id'];
+						$connection->query("INSERT INTO expenses_category (user_id, category) SELECT '$userID'as user_id, category FROM expenses_category_default ");
+						$connection->query("INSERT INTO incomes_category (user_id, category) SELECT '$userID'as user_id, category FROM incomes_category_default ");
+						$connection->query("INSERT INTO payments_method (user_id, method) SELECT '$userID'as user_id, method FROM payments_method_default ");
 					}
 					else
 					{
