@@ -1,3 +1,6 @@
+<?php
+	session_start();
+ ?>
 <!DOCTYPE HTML>
 <html lang="pl">
 	<head>
@@ -17,6 +20,25 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 		
 		<script>
+
+		var loggedUserId = "<?php if(isset($_SESSION['loggedUserId'])) echo $_SESSION['loggedUserId']; ?>";
+		var loggedUserName = "<?php if(isset($_SESSION['loggedUserName'])) echo $_SESSION['loggedUserName']; ?>"
+		
+		$(document).ready(function(){
+			if (loggedUserId)
+			{
+				$("#welcomeMessage").html("Witaj " + loggedUserName + "!");
+				$("#instructionMessage").html("Wybierz opcję z menu po lewej aby dodawać/usuwać przychody i wydatki, a także żeby przeglądać bilans");
+				$("#mainNavbar").html("<li><a href='logout.php' class='btn btn-secondary ml-auto mr-5' role = 'button' id='logout'> Wyloguj się</a></li>"); 
+			}
+			else
+			{
+				$("#welcomeMessage").html("Witaj!");
+				$("#instructionMessage").html("Zaloguj się do swojego konta lub załóż nowe aby móc korzystać z opcji dodawania/usuwania przychodów oraz przeglądania bilansu");
+				$("#mainNavbar").html("<li><button class='btn btn-secondary ml-auto mr-2' id='changeTabToLogin'> Zaloguj się</button></li><li><button class='btn btn-secondary ml-auto mr-5' id='changeTabToRegister'> Zarejestruj się</button></li>");
+			}
+		});
+
 		$(document).ready(function(){
 			$("#datePeriod").change(function(){
 				if(this.value=="niestandardowy"){
@@ -72,24 +94,17 @@
 				});
 			});
 		});
-		
-		
+
 		</script>
-		
 	 </head>
 	  
 	 <body>
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 			<a class="navbar-brand mr-auto ml-5" href="index.php"><i class="fas fa-piggy-bank"></i></a>
 			
-			<ul class="navbar-nav ml-auto">
-				<li>
-					<button class="btn btn-secondary ml-auto mr-2" id="changeTabToLogin"> Zaloguj się</button>
-				</li>
-				<li>
-					<button class="btn btn-secondary ml-auto mr-5" id="changeTabToRegister"> Zarejestruj się</button>
-				</li>
+			<ul class="navbar-nav ml-auto" id="mainNavbar">
 			</ul>
+			
 		</nav>
 		
 		 <!-- Modal for login/register -->
@@ -242,8 +257,8 @@
 						
 							<div class="tab-pane container active" id="main" >
 								<h1 class="display2 text-center">Prowadzenie budżetu osobistego</h1><hr>
-								<p> Witaj!</p>
-								<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tellus sed velit suscipit accumsan. Integer ultricies, erat a porta auctor, ex quam pellentesque sem, eget porta odio felis non justo. Ut vulputate iaculis erat et efficitur. Ut vel mauris sit amet diam fermentum malesuada. Duis condimentum, mi vitae tempus pellentesque, dui neque condimentum nunc, sed blandit mi eros nec velit. Pellentesque vitae tempus ante. Pellentesque feugiat erat vitae odio mollis, vitae dapibus magna condimentum. Aliquam lacus leo, tempus vitae finibus ut, suscipit sit amet nulla. In interdum dui augue, ut bibendum tortor tincidunt non. Aenean at turpis lacinia, blandit ligula id, blandit nisi. Aliquam molestie risus erat, eu pretium tellus porta ac. Vivamus a suscipit enim. Suspendisse vitae consequat tortor. Suspendisse egestas interdum pulvinar. Donec placerat, turpis dapibus hendrerit tempus, est ex efficitur felis, sit amet rutrum urna lacus at dui.</p>
+								<p id = "welcomeMessage"></p>
+								<p id = "instructionMessage"></p>
 							</div>
 						
 							<div class="tab-pane container fade" id="income">
@@ -415,6 +430,6 @@
 			
 			
 		</div>
-		
+
 	  </body>
   </html>

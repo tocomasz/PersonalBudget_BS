@@ -75,6 +75,8 @@
 	{
 		$("#loginFormMessage").addClass("text-success");
 		$("#loginFormMessage").removeClass("text-danger");
+		
+	
 		setTimeout(function(){ window.location = "index.php"; },1000);
 	}
 
