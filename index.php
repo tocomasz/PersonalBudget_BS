@@ -61,6 +61,18 @@
 			});
 		});
 		
+		$(document).ready(function(){
+			$("#loginForm").submit(function(event){
+				event.preventDefault();
+				var loginTabLogin = $("#loginTabLogin").val();
+				var loginTabPassword = $("#loginTabPassword").val();
+				$("#loginFormMessage").load("login.php", {
+					loginTabLogin: loginTabLogin,
+					loginTabPassword: loginTabPassword
+				});
+			});
+		});
+		
 		
 		</script>
 		
@@ -110,20 +122,21 @@
 						<div class="tab-content">
 						
 							<div class="tab-pane container active" id="loginTab">
-								<form>
+								<form id="loginForm" action="login.php" method post novalidate>
 									<div class="form-group row">
 										<label for="loginTabLogin" class="col-sm-5 col-form-label">Login</label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control" id="loginTabLogin">
+											<input type="text" class="form-control" id="loginTabLogin" name="loginTabLogin">
 										</div>
 									</div>
 									
 									<div class="form-group row">
 										<label for="loginTabPassword" class="col-sm-5 col-form-label">Hasło</label>
 										<div class="col-sm-7">
-											<input type="password" class="form-control" id="loginTabPassword">
+											<input type="password" class="form-control" id="loginTabPassword"  name="loginTabPassword">
 										</div>
 									</div>
+									<div id="loginFormMessage" class="text-danger"></div>
 									<button type="submit" class="btn btn-outline-secondary float-right">Zaloguj się</button>
 									
 								</form>
