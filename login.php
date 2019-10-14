@@ -75,8 +75,10 @@
 	{
 		$("#loginFormMessage").addClass("text-success");
 		$("#loginFormMessage").removeClass("text-danger");
-		
-	
+		$("#addIncomePill").removeClass("disabled");
+		$("#addExpensePill").removeClass("disabled");
+		$("#balancePill").removeClass("disabled");
+		$("#settingsPill").removeClass("disabled");
 		setTimeout(function(){ window.location = "index.php"; },1000);
 	}
 

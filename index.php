@@ -36,6 +36,10 @@
 				$("#welcomeMessage").html("Witaj!");
 				$("#instructionMessage").html("Zaloguj się do swojego konta lub załóż nowe aby móc korzystać z opcji dodawania/usuwania przychodów oraz przeglądania bilansu");
 				$("#mainNavbar").html("<li><button class='btn btn-secondary ml-auto mr-2' id='changeTabToLogin'> Zaloguj się</button></li><li><button class='btn btn-secondary ml-auto mr-5' id='changeTabToRegister'> Zarejestruj się</button></li>");
+				$("#addIncomePill").addClass("disabled");
+				$("#addExpensePill").addClass("disabled");
+				$("#balancePill").addClass("disabled");
+				$("#settingsPill").addClass("disabled");
 			}
 		});
 
@@ -208,188 +212,180 @@
 		<div class="container mt-4">
 			<div class="row">
 			
+				<!-- Navigation bar -->
 				<nav class="col-4">
 				
 					<ul class="nav nav-pills flex-column">
 					
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#income">
+							<a class="nav-link" id="addIncomePill" data-toggle="pill" href="#income">
 								<p><i class="fas fa-plus-square fa-3x"></i><p>
 								<p>Dodaj przychód</p>
 							</a>
 						</li>
 						
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#expense">
+							<a class="nav-link" id="addExpensePill" data-toggle="pill" href="#expense">
 								<p><i class="fas fa-minus-square fa-3x"></i></p>
 								<p>Dodaj wydatek</p>
 							</a>
 						</li>
 						
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#balance">
+							<a class="nav-link"  id="balancePill" data-toggle="pill" href="#balance">
 								<p><i class="fas fa-search-dollar fa-3x"></i></p>
 								<p>Przeglądaj bilans</p>
 							</a>
 						</li>
 						
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#settings">
+							<a class="nav-link" id="settingsPill" data-toggle="pill" href="#settings">
 								<p><i class="fas fa-cog fa-3x"></i></p>
 								<p>Ustawienia</p>
 							</a>
 						</li>
 						
-						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#logout">
-								<p><i class="fas fa-sign-out-alt fa-3x"></i></p>
-								<p>Wyloguj się</p>
-							</a>
-						</li>								
-						
 					</ul>
 					
 				</nav>
 			
-					<div class="col-8 bg-light rounded-lg shadow-lg pt-4">
+				<!--Main content -->
+				<div class="col-8 bg-light rounded-lg shadow-lg pt-4">
+				
+					<div class="tab-content">
 					
-						<div class="tab-content">
-						
-							<div class="tab-pane container active" id="main" >
-								<h1 class="display2 text-center">Prowadzenie budżetu osobistego</h1><hr>
-								<p id = "welcomeMessage"></p>
-								<p id = "instructionMessage"></p>
-							</div>
-						
-							<div class="tab-pane container fade" id="income">
-								
-								<h1 class="display2 text-center">Dodawanie przychodu</h1><hr>
-								
-								<form>
-									<div class="form-group  row">
-										<label for="incomeAmount" class="col-sm-4 col-form-label">Kwota przychodu</label>
-										<div class="col-sm-8">
-											<input type="number" class="form-control" id="incomeAmount" placeholder="podaj kwotę w PLN">
-										</div>
-									</div>
-									
-									<div class="form-group  row">
-										<label for="incomeDate" class="col-sm-4 col-form-label">Data przychodu</label>
-										<div class="col-sm-8">
-											<input type="date" class="form-control" id="incomeDate">
-										</div>
-									</div>
-									
-									<div class="form-group  row">
-										<label for="incomeCategory" class="col-sm-4 col-form-label">Kategoria</label>
-										<div class="col-sm-8">
-											<select id="incomeCategory" class="custom-select">
-												<option selected> Kategoria</option>
-												<option value="wynagrodzenie">Wynagrodzenie</option>
-												<option value="odsetki">Odsetki bankowe</option>
-												<option value="sprzedaz">Sprzedaż internetowe</option>
-												<option value="inne">Inne </option>
-											</select>
-										</div>
-									</div>			
-									
-								<button type="submit" class="btn btn-outline-secondary float-right mr-2">Anuluj</button>
-								<button type="submit" class="btn btn-outline-secondary float-right mr-2">Dodaj</button>
-								
-								</form>
-																					
-							</div>
+						<div class="tab-pane container active" id="main" >
+							<h1 class="display2 text-center">Prowadzenie budżetu osobistego</h1><hr>
+							<p id = "welcomeMessage"></p>
+							<p id = "instructionMessage"></p>
+						</div>
+					
+						<div class="tab-pane container fade" id="income">
 							
-							<div class="tab-pane container fade" id="expense">
-								
-								<h1 class="display2 text-center">Dodawanie wydatku</h1><hr>
-								
-								<form>
-									<div class="form-group  row">
-										<label for="expenseAmount" class="col-sm-4 col-form-label">Kwota wydatku</label>
-										<div class="col-sm-8">
-											<input type="number" class="form-control" id="expenseAmount" placeholder="podaj kwotę w PLN">
-										</div>
+							<h1 class="display2 text-center">Dodawanie przychodu</h1><hr>
+							
+							<form>
+								<div class="form-group  row">
+									<label for="incomeAmount" class="col-sm-4 col-form-label">Kwota przychodu</label>
+									<div class="col-sm-8">
+										<input type="number" class="form-control" id="incomeAmount" placeholder="podaj kwotę w PLN">
 									</div>
-									
-									<div class="form-group  row">
-										<label for="expenseDate" class="col-sm-4 col-form-label">Data wydatku</label>
-										<div class="col-sm-8">
-											<input type="date" class="form-control" id="expenseDate">
-										</div>
+								</div>
+								
+								<div class="form-group  row">
+									<label for="incomeDate" class="col-sm-4 col-form-label">Data przychodu</label>
+									<div class="col-sm-8">
+										<input type="date" class="form-control" id="incomeDate">
 									</div>
-									
-									<div class="form-group  row">
-										<label for="expenseForm" class="col-sm-4 col-form-label">Rodzaj płatności</label>
-										<div class="col-sm-8">
-											<select id="expenseForm" class="custom-select">
-												<option selected>Rodzaj płatności</option>
-												<option value="gotowka">Gotówka</option>
-												<option value="debetowa">Karta debetowa</option>
-												<option value="kredytowa">Karta kredytowa</option>
-											</select>
-										</div>
-									</div>		
+								</div>
+								
+								<div class="form-group  row">
+									<label for="incomeCategory" class="col-sm-4 col-form-label">Kategoria</label>
+									<div class="col-sm-8">
+										<select id="incomeCategory" class="custom-select">
+											<option selected> Kategoria</option>
+											<option value="wynagrodzenie">Wynagrodzenie</option>
+											<option value="odsetki">Odsetki bankowe</option>
+											<option value="sprzedaz">Sprzedaż internetowe</option>
+											<option value="inne">Inne </option>
+										</select>
+									</div>
+								</div>			
+								
+							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Anuluj</button>
+							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Dodaj</button>
+							
+							</form>
+																				
+						</div>
+						
+						<div class="tab-pane container fade" id="expense">
+							
+							<h1 class="display2 text-center">Dodawanie wydatku</h1><hr>
+							
+							<form>
+								<div class="form-group  row">
+									<label for="expenseAmount" class="col-sm-4 col-form-label">Kwota wydatku</label>
+									<div class="col-sm-8">
+										<input type="number" class="form-control" id="expenseAmount" placeholder="podaj kwotę w PLN">
+									</div>
+								</div>
+								
+								<div class="form-group  row">
+									<label for="expenseDate" class="col-sm-4 col-form-label">Data wydatku</label>
+									<div class="col-sm-8">
+										<input type="date" class="form-control" id="expenseDate">
+									</div>
+								</div>
+								
+								<div class="form-group  row">
+									<label for="expenseForm" class="col-sm-4 col-form-label">Rodzaj płatności</label>
+									<div class="col-sm-8">
+										<select id="expenseForm" class="custom-select">
+											<option selected>Rodzaj płatności</option>
+											<option value="gotowka">Gotówka</option>
+											<option value="debetowa">Karta debetowa</option>
+											<option value="kredytowa">Karta kredytowa</option>
+										</select>
+									</div>
+								</div>		
 
-									<div class="form-group  row">
-										<label for="expenseCategory" class="col-sm-4 col-form-label">Kategoria</label>
-										<div class="col-sm-8">
-											<select id="expenseCategory" class="custom-select">
-												<option selected> Kategoria</option>
-												  <option value="jedzenie">Jedzenie</option>
-												  <option value="mieszkanie">Mieszkanie</option>
-												  <option value="transport">Transport</option>
-												  <option value="telekomunikacja">Telekomunikacja</option>
-												  <option value="zdrowie">Opieka zdrowotna</option>
-												  <option value="ubranie">Ubranie</option>
-												  <option value="higiena">Higiena</option>
-												  <option value="dzieci">Dzieci</option>
-												  <option value="rozrywka">Rozrywka</option>
-												  <option value="podroz">Podróż</option>
-												  <option value="szkolenie">Szkolenie</option>
-												  <option value="ksiazka">Książka</option>
-												  <option value="dlugi">Spłata długów</option>
-												  <option value="darowizna">Darowizna</option>
-												  <option value="inne">Inne wydatki</option>
-											</select>
-										</div>
-									</div>											
-								
-								<button type="submit" class="btn btn-outline-secondary float-right mr-2">Anuluj</button>
-								<button type="submit" class="btn btn-outline-secondary float-right mr-2">Dodaj</button>								
-								</form>
-																					
-							</div>
-							<div class="tab-pane container fade" id="balance">
-							
-								<h1 class="display2 text-center">Bilans przychodów i wydatków</h1><hr>
-								
-								<form>
-								
-									<div class="form-group  row">
-										<label for="datePeriod" class="col-sm-4 col-form-label">Przedział bilansu</label>
-										<div class="col-sm-8">
-											<select name="datePeriod" class="custom-select" id="datePeriod">
-												<option selected value="przedzial">Przedział bilansu</option>
-												<option value="biezacy">Bieżący miesiąc</option>
-												<option value="poprzedni">Poprzedni miesiąc</option>
-												<option value="rok">Bieżący rok</option>
-												<option value="niestandardowy">Niestandardowy</option>
-											</select>
-										</div>
+								<div class="form-group  row">
+									<label for="expenseCategory" class="col-sm-4 col-form-label">Kategoria</label>
+									<div class="col-sm-8">
+										<select id="expenseCategory" class="custom-select">
+											<option selected> Kategoria</option>
+											  <option value="jedzenie">Jedzenie</option>
+											  <option value="mieszkanie">Mieszkanie</option>
+											  <option value="transport">Transport</option>
+											  <option value="telekomunikacja">Telekomunikacja</option>
+											  <option value="zdrowie">Opieka zdrowotna</option>
+											  <option value="ubranie">Ubranie</option>
+											  <option value="higiena">Higiena</option>
+											  <option value="dzieci">Dzieci</option>
+											  <option value="rozrywka">Rozrywka</option>
+											  <option value="podroz">Podróż</option>
+											  <option value="szkolenie">Szkolenie</option>
+											  <option value="ksiazka">Książka</option>
+											  <option value="dlugi">Spłata długów</option>
+											  <option value="darowizna">Darowizna</option>
+											  <option value="inne">Inne wydatki</option>
+										</select>
 									</div>
-								<button type="submit" class="btn btn-outline-secondary float-right mr-2">Anuluj</button>
-								<button type="submit" class="btn btn-outline-secondary float-right mr-2">Pokaż bilans</button>									
-								</form>
-							</div>
-							<div class="tab-pane container fade" id="settings">
-								4
-							</div>
-							<div class="tab-pane container fade" id="logout">
-								5
-							</div>
+								</div>											
+							
+							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Anuluj</button>
+							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Dodaj</button>								
+							</form>
+																				
+						</div>
+						<div class="tab-pane container fade" id="balance">
+						
+							<h1 class="display2 text-center">Bilans przychodów i wydatków</h1><hr>
+							
+							<form>
+							
+								<div class="form-group  row">
+									<label for="datePeriod" class="col-sm-4 col-form-label">Przedział bilansu</label>
+									<div class="col-sm-8">
+										<select name="datePeriod" class="custom-select" id="datePeriod">
+											<option selected value="przedzial">Przedział bilansu</option>
+											<option value="biezacy">Bieżący miesiąc</option>
+											<option value="poprzedni">Poprzedni miesiąc</option>
+											<option value="rok">Bieżący rok</option>
+											<option value="niestandardowy">Niestandardowy</option>
+										</select>
+									</div>
+								</div>
+							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Anuluj</button>
+							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Pokaż bilans</button>									
+							</form>
+						</div>
+						<div class="tab-pane container fade" id="settings">
+							4
 						</div>
 					</div>
+				</div>
 			</div>
 			
 			 <!-- Modal for custom dates -->
