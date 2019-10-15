@@ -286,6 +286,7 @@
 									<label for="incomeCategory" class="col-sm-4 col-form-label">Kategoria</label>
 									<div class="col-sm-8">
 										<select id="incomeCategory" class="custom-select">
+										<option selected>Kategoria</option>
 										<?php
 											if(isset(($_SESSION['loggedUserIncomeCategories'])))
 											{
@@ -329,10 +330,16 @@
 									<label for="expenseForm" class="col-sm-4 col-form-label">Rodzaj płatności</label>
 									<div class="col-sm-8">
 										<select id="expenseForm" class="custom-select">
-											<option selected>Rodzaj płatności</option>
-											<option value="gotowka">Gotówka</option>
-											<option value="debetowa">Karta debetowa</option>
-											<option value="kredytowa">Karta kredytowa</option>
+										<option selected>Rodzaj płatności</option>
+										<?php
+											if(isset(($_SESSION['loggedUserPaymentMethods'])))
+											{
+												foreach ($_SESSION['loggedUserPaymentMethods'] as $key => $value)
+												{
+													echo '<option value="'.$value.'">'.$value."</option>";
+												}
+											}
+										?>
 										</select>
 									</div>
 								</div>		
@@ -342,21 +349,15 @@
 									<div class="col-sm-8">
 										<select id="expenseCategory" class="custom-select">
 											<option selected> Kategoria</option>
-											  <option value="jedzenie">Jedzenie</option>
-											  <option value="mieszkanie">Mieszkanie</option>
-											  <option value="transport">Transport</option>
-											  <option value="telekomunikacja">Telekomunikacja</option>
-											  <option value="zdrowie">Opieka zdrowotna</option>
-											  <option value="ubranie">Ubranie</option>
-											  <option value="higiena">Higiena</option>
-											  <option value="dzieci">Dzieci</option>
-											  <option value="rozrywka">Rozrywka</option>
-											  <option value="podroz">Podróż</option>
-											  <option value="szkolenie">Szkolenie</option>
-											  <option value="ksiazka">Książka</option>
-											  <option value="dlugi">Spłata długów</option>
-											  <option value="darowizna">Darowizna</option>
-											  <option value="inne">Inne wydatki</option>
+											<?php
+												if(isset(($_SESSION['loggedUserExpenseCategories'])))
+												{
+													foreach ($_SESSION['loggedUserExpenseCategories'] as $key => $value)
+													{
+														echo '<option value="'.$value.'">'.$value."</option>";
+													}
+												}
+											?>
 										</select>
 									</div>
 								</div>											

@@ -46,6 +46,22 @@
 						}
 						$result->close();
 						
+						$result = $connection->query("SELECT category FROM expenses_category WHERE user_id = '$loggedUserId' ");
+						$_SESSION['loggedUserExpenseCategories'] = [];
+						while($row = $result->fetch_row())
+						{
+							array_push($_SESSION['loggedUserExpenseCategories'],$row[0]);
+						}
+						$result->close();
+						
+						$result = $connection->query("SELECT method FROM payments_method WHERE user_id = '$loggedUserId' ");
+						$_SESSION['loggedUserPaymentMethods'] = [];
+						while($row = $result->fetch_row())
+						{
+							array_push($_SESSION['loggedUserPaymentMethods'],$row[0]);
+						}
+						$result->close();
+						
 						echo "Zalogowano poprawnie";
 					}
 					else
