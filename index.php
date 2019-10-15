@@ -22,7 +22,9 @@
 		<script>
 
 		var loggedUserId = "<?php if(isset($_SESSION['loggedUserId'])) echo $_SESSION['loggedUserId']; ?>";
-		var loggedUserName = "<?php if(isset($_SESSION['loggedUserName'])) echo $_SESSION['loggedUserName']; ?>"
+		var loggedUserName = "<?php if(isset($_SESSION['loggedUserName'])) echo $_SESSION['loggedUserName']; ?>";
+
+
 		
 		$(document).ready(function(){
 			if (loggedUserId)
@@ -30,6 +32,7 @@
 				$("#welcomeMessage").html("Witaj " + loggedUserName + "!");
 				$("#instructionMessage").html("Wybierz opcję z menu po lewej aby dodawać/usuwać przychody i wydatki, a także żeby przeglądać bilans");
 				$("#mainNavbar").html("<li><a href='logout.php' class='btn btn-secondary ml-auto mr-5' role = 'button' id='logout'> Wyloguj się</a></li>"); 
+
 			}
 			else
 			{
@@ -283,11 +286,15 @@
 									<label for="incomeCategory" class="col-sm-4 col-form-label">Kategoria</label>
 									<div class="col-sm-8">
 										<select id="incomeCategory" class="custom-select">
-											<option selected> Kategoria</option>
-											<option value="wynagrodzenie">Wynagrodzenie</option>
-											<option value="odsetki">Odsetki bankowe</option>
-											<option value="sprzedaz">Sprzedaż internetowe</option>
-											<option value="inne">Inne </option>
+										<?php
+											if(isset(($_SESSION['loggedUserIncomeCategories'])))
+											{
+												foreach ($_SESSION['loggedUserIncomeCategories'] as $key => $value)
+												{
+													echo '<option value="'.$value.'">'.$value."</option>";
+												}
+											}
+										?>
 										</select>
 									</div>
 								</div>			

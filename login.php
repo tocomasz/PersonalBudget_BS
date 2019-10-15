@@ -39,10 +39,12 @@
 						
 						$loggedUserId = $_SESSION['loggedUserId'] ;
 						$result = $connection->query("SELECT category FROM incomes_category WHERE user_id = '$loggedUserId' ");
-						$incomeCategories = $result->fetch_all();
-						$_SESSION['loggedUserIncomeCategories'] = $incomeCategories;
-						
-						
+						$_SESSION['loggedUserIncomeCategories'] = [];
+						while($row = $result->fetch_row())
+						{
+							array_push($_SESSION['loggedUserIncomeCategories'],$row[0]);
+						}
+						$result->close();
 						
 						echo "Zalogowano poprawnie";
 					}
@@ -75,10 +77,13 @@
 	{
 		$("#loginFormMessage").addClass("text-success");
 		$("#loginFormMessage").removeClass("text-danger");
+		
 		$("#addIncomePill").removeClass("disabled");
 		$("#addExpensePill").removeClass("disabled");
 		$("#balancePill").removeClass("disabled");
 		$("#settingsPill").removeClass("disabled");
+		
+		
 		setTimeout(function(){ window.location = "index.php"; },1000);
 	}
 
