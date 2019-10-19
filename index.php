@@ -344,13 +344,12 @@
 									<label for="expenseForm" class="col-sm-4 col-form-label">Rodzaj płatności</label>
 									<div class="col-sm-8">
 										<select id="expenseForm" class="custom-select">
-										<option selected>Rodzaj płatności</option>
 										<?php
 											if(isset(($_SESSION['loggedUserPaymentMethods'])))
 											{
-												foreach ($_SESSION['loggedUserPaymentMethods'] as $key => $value)
+												foreach ($_SESSION['loggedUserPaymentMethods'] as $row)
 												{
-													echo '<option value="'.$value.'">'.$value."</option>";
+													echo '<option value="'.$row['id'].'">'.$row['method']."</option>";
 												}
 											}
 										?>
@@ -362,13 +361,12 @@
 									<label for="expenseCategory" class="col-sm-4 col-form-label">Kategoria</label>
 									<div class="col-sm-8">
 										<select id="expenseCategory" class="custom-select">
-											<option selected> Kategoria</option>
 											<?php
 												if(isset(($_SESSION['loggedUserExpenseCategories'])))
 												{
-													foreach ($_SESSION['loggedUserExpenseCategories'] as $key => $value)
+													foreach ($_SESSION['loggedUserExpenseCategories'] as $row)
 													{
-														echo '<option value="'.$value.'">'.$value."</option>";
+														echo '<option value="'.$row['id'].'">'.$row['category']."</option>";
 													}
 												}
 											?>
