@@ -101,6 +101,20 @@
 				});
 			});
 		});
+		
+		$(document).ready(function(){
+			$("#addIncomeForm").submit(function(event){
+				event.preventDefault();
+				var incomeAmount = $("#incomeAmount").val();
+				var incomeDate = $("#incomeDate").val();
+				var incomeCategoryId = $("#incomeCategoryId").val();
+				$("#addIncomeFormMessage").load("addIncome.php", {
+					incomeAmount: incomeAmount,
+					incomeDate: incomeDate,
+					incomeCategoryId: incomeCategoryId
+				});
+			});
+		});
 
 		</script>
 	 </head>
@@ -144,7 +158,7 @@
 						<div class="tab-content">
 						
 							<div class="tab-pane container active" id="loginTab">
-								<form id="loginForm" action="login.php" method post novalidate>
+								<form id="loginForm" action="login.php" method="post" novalidate>
 									<div class="form-group row">
 										<label for="loginTabLogin" class="col-sm-5 col-form-label">Login</label>
 										<div class="col-sm-7">
@@ -267,32 +281,33 @@
 							
 							<h1 class="display2 text-center">Dodawanie przychodu</h1><hr>
 							
-							<form>
+							<form id="addIncomeForm" action="addIncome.php" method="post" novalidate>
 								<div class="form-group  row">
 									<label for="incomeAmount" class="col-sm-4 col-form-label">Kwota przychodu</label>
 									<div class="col-sm-8">
-										<input type="number" class="form-control" id="incomeAmount" placeholder="podaj kwotę w PLN">
+										<input type="number" class="form-control" id="incomeAmount" name = "incomeAmount" placeholder="podaj kwotę w PLN">
+										<small class = "text-danger" id="addIncomeAmountFeedback"></small>
 									</div>
 								</div>
 								
 								<div class="form-group  row">
 									<label for="incomeDate" class="col-sm-4 col-form-label">Data przychodu</label>
 									<div class="col-sm-8">
-										<input type="date" class="form-control" id="incomeDate">
+										<input type="date" class="form-control" id="incomeDate" name="incomeDate">
+										<small class = "text-danger" id="addIncomeDateFeedback"></small>
 									</div>
 								</div>
 								
 								<div class="form-group  row">
 									<label for="incomeCategory" class="col-sm-4 col-form-label">Kategoria</label>
 									<div class="col-sm-8">
-										<select id="incomeCategory" class="custom-select">
-										<option selected>Kategoria</option>
+										<select id="incomeCategoryId" name ="incomeCategory" class="custom-select">
 										<?php
 											if(isset(($_SESSION['loggedUserIncomeCategories'])))
 											{
-												foreach ($_SESSION['loggedUserIncomeCategories'] as $key => $value)
+												foreach ($_SESSION['loggedUserIncomeCategories'] as $row)
 												{
-													echo '<option value="'.$value.'">'.$value."</option>";
+													echo '<option value="'.$row['id'].'">'.$row['category']."</option>";
 												}
 											}
 										?>
@@ -300,9 +315,8 @@
 									</div>
 								</div>			
 								
-							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Anuluj</button>
-							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Dodaj</button>
-							
+								<div id="addIncomeFormMessage" class="text-danger"></div>
+								<button type="submit" class="btn btn-outline-secondary float-right mr-2">Dodaj</button>
 							</form>
 																				
 						</div>
