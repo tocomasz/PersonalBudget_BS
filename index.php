@@ -123,6 +123,31 @@
 				}, 2000);
 			});
 		});
+		
+		$(document).ready(function(){
+			$("#addExpenseForm").submit(function(event){
+				event.preventDefault();
+				var expenseAmount = $("#expenseAmount").val();
+				var expenseDate = $("#expenseDate").val();
+				var expenseCategoryId = $("#expenseCategoryId").val();
+				var expensePaymentMethodId= $("#expensePaymentMethodId").val();
+				var expenseComment = $("#expenseComment").val();
+				$("#addExpenseFormMessage").load("addExpense.php", {
+					expenseAmount: expenseAmount,
+					expenseDate: expenseDate,
+					expenseCategoryId: expenseCategoryId,
+					expensePaymentMethodId: expensePaymentMethodId,
+					expenseComment: expenseComment
+				});
+				
+				setTimeout(function(){
+					$("#addExpenseFormMessage").empty();
+					$("#expenseAmount").val('');
+					$("#expenseDate").val('');
+					$("#expenseComment").val('');
+				}, 2000);
+			});
+		});
 
 		</script>
 	 </head>
@@ -341,25 +366,27 @@
 							
 							<h1 class="display2 text-center">Dodawanie wydatku</h1><hr>
 							
-							<form>
+							<form id="addExpenseForm" action="addExpense.php" method="post" novalidate>
 								<div class="form-group  row">
 									<label for="expenseAmount" class="col-sm-4 col-form-label">Kwota wydatku</label>
 									<div class="col-sm-8">
-										<input type="number" class="form-control" id="expenseAmount" placeholder="podaj kwotę w PLN">
+										<input type="number" class="form-control" id="expenseAmount" name="expenseAmount" placeholder="podaj kwotę w PLN">
+										<small class = "text-danger" id="addExpenseAmountFeedback"></small>
 									</div>
 								</div>
 								
 								<div class="form-group  row">
 									<label for="expenseDate" class="col-sm-4 col-form-label">Data wydatku</label>
 									<div class="col-sm-8">
-										<input type="date" class="form-control" id="expenseDate">
+										<input type="date" class="form-control" id="expenseDate" name="expenseDate">
+										<small class = "text-danger" id="addExpenseDateFeedback"></small>
 									</div>
 								</div>
 								
 								<div class="form-group  row">
 									<label for="expenseForm" class="col-sm-4 col-form-label">Rodzaj płatności</label>
 									<div class="col-sm-8">
-										<select id="expenseForm" class="custom-select">
+										<select id="expensePaymentMethodId" name="paymentMethodId" class="custom-select">
 										<?php
 											if(isset(($_SESSION['loggedUserPaymentMethods'])))
 											{
@@ -376,7 +403,7 @@
 								<div class="form-group  row">
 									<label for="expenseCategory" class="col-sm-4 col-form-label">Kategoria</label>
 									<div class="col-sm-8">
-										<select id="expenseCategory" class="custom-select">
+										<select id="expenseCategoryId" name="expenseCategoryId" class="custom-select">
 											<?php
 												if(isset(($_SESSION['loggedUserExpenseCategories'])))
 												{
@@ -388,9 +415,17 @@
 											?>
 										</select>
 									</div>
-								</div>											
-							
-							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Anuluj</button>
+								</div>		
+								
+								<div class="form-group  row">
+									<label for="expenseComment=" class="col-sm-4 col-form-label">Komentarz</label>
+									<div class="col-sm-8">
+										<textarea class="form-control" rows = "3" id="expenseComment" name="expenseComment"></textarea>
+										<small class = "text-danger" id="addExpenseCommentFeedback"></small>
+									</div>
+								</div>					
+								
+							<div id="addExpenseFormMessage" class="text-danger"></div>
 							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Dodaj</button>								
 							</form>
 																				
