@@ -133,5 +133,8 @@
 		$("#addIncomeDateFeedback").html("<?php echo $_SESSION['e_incomeDate']; ?>");
 		$("#addIncomeCommentFeedback").html("<?php echo $_SESSION['e_incomeComment']; ?>");
 		
-
+	function hideMessage() {
+		<?php echo "" ?>
+	};
+	setTimeout(hideMessage, 2000);
 </script>

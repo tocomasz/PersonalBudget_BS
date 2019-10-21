@@ -23,9 +23,8 @@
 
 		var loggedUserId = "<?php if(isset($_SESSION['loggedUserId'])) echo $_SESSION['loggedUserId']; ?>";
 		var loggedUserName = "<?php if(isset($_SESSION['loggedUserName'])) echo $_SESSION['loggedUserName']; ?>";
-
-
 		
+
 		$(document).ready(function(){
 			if (loggedUserId)
 			{
@@ -115,6 +114,13 @@
 					incomeCategoryId: incomeCategoryId,
 					incomeComment: incomeComment
 				});
+				
+				setTimeout(function(){
+					$("#addIncomeFormMessage").empty();
+					$("#incomeAmount").val('');
+					$("#incomeDate").val('');
+					$("#incomeComment").val('');
+				}, 2000);
 			});
 		});
 
