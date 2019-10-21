@@ -23,9 +23,8 @@
 
 		var loggedUserId = "<?php if(isset($_SESSION['loggedUserId'])) echo $_SESSION['loggedUserId']; ?>";
 		var loggedUserName = "<?php if(isset($_SESSION['loggedUserName'])) echo $_SESSION['loggedUserName']; ?>";
-
-
 		
+
 		$(document).ready(function(){
 			if (loggedUserId)
 			{
@@ -101,6 +100,54 @@
 				});
 			});
 		});
+		
+		$(document).ready(function(){
+			$("#addIncomeForm").submit(function(event){
+				event.preventDefault();
+				var incomeAmount = $("#incomeAmount").val();
+				var incomeDate = $("#incomeDate").val();
+				var incomeCategoryId = $("#incomeCategoryId").val();
+				var incomeComment = $("#incomeComment").val();
+				$("#addIncomeFormMessage").load("addIncome.php", {
+					incomeAmount: incomeAmount,
+					incomeDate: incomeDate,
+					incomeCategoryId: incomeCategoryId,
+					incomeComment: incomeComment
+				});
+				
+				setTimeout(function(){
+					$("#addIncomeFormMessage").empty();
+					$("#incomeAmount").val('');
+					$("#incomeDate").val('');
+					$("#incomeComment").val('');
+				}, 2000);
+			});
+		});
+		
+		$(document).ready(function(){
+			$("#addExpenseForm").submit(function(event){
+				event.preventDefault();
+				var expenseAmount = $("#expenseAmount").val();
+				var expenseDate = $("#expenseDate").val();
+				var expenseCategoryId = $("#expenseCategoryId").val();
+				var expensePaymentMethodId= $("#expensePaymentMethodId").val();
+				var expenseComment = $("#expenseComment").val();
+				$("#addExpenseFormMessage").load("addExpense.php", {
+					expenseAmount: expenseAmount,
+					expenseDate: expenseDate,
+					expenseCategoryId: expenseCategoryId,
+					expensePaymentMethodId: expensePaymentMethodId,
+					expenseComment: expenseComment
+				});
+				
+				setTimeout(function(){
+					$("#addExpenseFormMessage").empty();
+					$("#expenseAmount").val('');
+					$("#expenseDate").val('');
+					$("#expenseComment").val('');
+				}, 2000);
+			});
+		});
 
 		</script>
 	 </head>
@@ -144,7 +191,7 @@
 						<div class="tab-content">
 						
 							<div class="tab-pane container active" id="loginTab">
-								<form id="loginForm" action="login.php" method post novalidate>
+								<form id="loginForm" action="login.php" method="post" novalidate>
 									<div class="form-group row">
 										<label for="loginTabLogin" class="col-sm-5 col-form-label">Login</label>
 										<div class="col-sm-7">
@@ -267,42 +314,50 @@
 							
 							<h1 class="display2 text-center">Dodawanie przychodu</h1><hr>
 							
-							<form>
+							<form id="addIncomeForm" action="addIncome.php" method="post" novalidate>
 								<div class="form-group  row">
 									<label for="incomeAmount" class="col-sm-4 col-form-label">Kwota przychodu</label>
 									<div class="col-sm-8">
-										<input type="number" class="form-control" id="incomeAmount" placeholder="podaj kwotę w PLN">
+										<input type="number" class="form-control" id="incomeAmount" name = "incomeAmount" placeholder="podaj kwotę w PLN">
+										<small class = "text-danger" id="addIncomeAmountFeedback"></small>
 									</div>
 								</div>
 								
 								<div class="form-group  row">
 									<label for="incomeDate" class="col-sm-4 col-form-label">Data przychodu</label>
 									<div class="col-sm-8">
-										<input type="date" class="form-control" id="incomeDate">
+										<input type="date" class="form-control" id="incomeDate" name="incomeDate">
+										<small class = "text-danger" id="addIncomeDateFeedback"></small>
 									</div>
 								</div>
 								
 								<div class="form-group  row">
 									<label for="incomeCategory" class="col-sm-4 col-form-label">Kategoria</label>
 									<div class="col-sm-8">
-										<select id="incomeCategory" class="custom-select">
-										<option selected>Kategoria</option>
+										<select id="incomeCategoryId" name ="incomeCategory" class="custom-select">
 										<?php
 											if(isset(($_SESSION['loggedUserIncomeCategories'])))
 											{
-												foreach ($_SESSION['loggedUserIncomeCategories'] as $key => $value)
+												foreach ($_SESSION['loggedUserIncomeCategories'] as $row)
 												{
-													echo '<option value="'.$value.'">'.$value."</option>";
+													echo '<option value="'.$row['id'].'">'.$row['category']."</option>";
 												}
 											}
 										?>
 										</select>
 									</div>
-								</div>			
+								</div>	
 								
-							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Anuluj</button>
-							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Dodaj</button>
-							
+								<div class="form-group  row">
+									<label for="incomeComment" class="col-sm-4 col-form-label">Komentarz</label>
+									<div class="col-sm-8">
+										<textarea class="form-control" rows = "3" id="incomeComment" name="incomeComment"></textarea>
+										<small class = "text-danger" id="addIncomeCommentFeedback"></small>
+									</div>
+								</div>								
+								
+								<div id="addIncomeFormMessage" class="text-danger"></div>
+								<button type="submit" class="btn btn-outline-secondary float-right mr-2">Dodaj</button>
 							</form>
 																				
 						</div>
@@ -311,32 +366,33 @@
 							
 							<h1 class="display2 text-center">Dodawanie wydatku</h1><hr>
 							
-							<form>
+							<form id="addExpenseForm" action="addExpense.php" method="post" novalidate>
 								<div class="form-group  row">
 									<label for="expenseAmount" class="col-sm-4 col-form-label">Kwota wydatku</label>
 									<div class="col-sm-8">
-										<input type="number" class="form-control" id="expenseAmount" placeholder="podaj kwotę w PLN">
+										<input type="number" class="form-control" id="expenseAmount" name="expenseAmount" placeholder="podaj kwotę w PLN">
+										<small class = "text-danger" id="addExpenseAmountFeedback"></small>
 									</div>
 								</div>
 								
 								<div class="form-group  row">
 									<label for="expenseDate" class="col-sm-4 col-form-label">Data wydatku</label>
 									<div class="col-sm-8">
-										<input type="date" class="form-control" id="expenseDate">
+										<input type="date" class="form-control" id="expenseDate" name="expenseDate">
+										<small class = "text-danger" id="addExpenseDateFeedback"></small>
 									</div>
 								</div>
 								
 								<div class="form-group  row">
 									<label for="expenseForm" class="col-sm-4 col-form-label">Rodzaj płatności</label>
 									<div class="col-sm-8">
-										<select id="expenseForm" class="custom-select">
-										<option selected>Rodzaj płatności</option>
+										<select id="expensePaymentMethodId" name="paymentMethodId" class="custom-select">
 										<?php
 											if(isset(($_SESSION['loggedUserPaymentMethods'])))
 											{
-												foreach ($_SESSION['loggedUserPaymentMethods'] as $key => $value)
+												foreach ($_SESSION['loggedUserPaymentMethods'] as $row)
 												{
-													echo '<option value="'.$value.'">'.$value."</option>";
+													echo '<option value="'.$row['id'].'">'.$row['method']."</option>";
 												}
 											}
 										?>
@@ -347,22 +403,29 @@
 								<div class="form-group  row">
 									<label for="expenseCategory" class="col-sm-4 col-form-label">Kategoria</label>
 									<div class="col-sm-8">
-										<select id="expenseCategory" class="custom-select">
-											<option selected> Kategoria</option>
+										<select id="expenseCategoryId" name="expenseCategoryId" class="custom-select">
 											<?php
 												if(isset(($_SESSION['loggedUserExpenseCategories'])))
 												{
-													foreach ($_SESSION['loggedUserExpenseCategories'] as $key => $value)
+													foreach ($_SESSION['loggedUserExpenseCategories'] as $row)
 													{
-														echo '<option value="'.$value.'">'.$value."</option>";
+														echo '<option value="'.$row['id'].'">'.$row['category']."</option>";
 													}
 												}
 											?>
 										</select>
 									</div>
-								</div>											
-							
-							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Anuluj</button>
+								</div>		
+								
+								<div class="form-group  row">
+									<label for="expenseComment=" class="col-sm-4 col-form-label">Komentarz</label>
+									<div class="col-sm-8">
+										<textarea class="form-control" rows = "3" id="expenseComment" name="expenseComment"></textarea>
+										<small class = "text-danger" id="addExpenseCommentFeedback"></small>
+									</div>
+								</div>					
+								
+							<div id="addExpenseFormMessage" class="text-danger"></div>
 							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Dodaj</button>								
 							</form>
 																				

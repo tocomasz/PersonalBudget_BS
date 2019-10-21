@@ -1,12 +1,18 @@
 <?php
 	session_start();
-	$_SESSION['e_name'] = "";
-	$_SESSION['e_email'] = "";
-	$_SESSION['e_login'] = "";
-	$_SESSION['e_pass'] = "";
-
-	if(isset($_POST['registerTabLogin']))
+	
+	if(!isset($_POST['registerTabLogin']))
 	{
+		header('Location: index.php');
+		exit();
+	}
+	else
+	{
+		$_SESSION['e_name'] = "";
+		$_SESSION['e_email'] = "";
+		$_SESSION['e_login'] = "";
+		$_SESSION['e_pass'] = "";
+		
 		$all_ok=true;
 		
 		$password = $_POST['registerTabPassword'];

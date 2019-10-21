@@ -38,27 +38,27 @@
 						$result->close();
 						
 						$loggedUserId = $_SESSION['loggedUserId'] ;
-						$result = $connection->query("SELECT category FROM incomes_category WHERE user_id = '$loggedUserId' ");
+						$result = $connection->query("SELECT category, id FROM incomes_category WHERE user_id = '$loggedUserId' ");
 						$_SESSION['loggedUserIncomeCategories'] = [];
-						while($row = $result->fetch_row())
+						while($row = $result->fetch_assoc())
 						{
-							array_push($_SESSION['loggedUserIncomeCategories'],$row[0]);
+							array_push($_SESSION['loggedUserIncomeCategories'],$row);
 						}
 						$result->close();
 						
-						$result = $connection->query("SELECT category FROM expenses_category WHERE user_id = '$loggedUserId' ");
+						$result = $connection->query("SELECT category, id FROM expenses_category WHERE user_id = '$loggedUserId' ");
 						$_SESSION['loggedUserExpenseCategories'] = [];
-						while($row = $result->fetch_row())
+						while($row = $result->fetch_assoc())
 						{
-							array_push($_SESSION['loggedUserExpenseCategories'],$row[0]);
+							array_push($_SESSION['loggedUserExpenseCategories'],$row);
 						}
 						$result->close();
 						
-						$result = $connection->query("SELECT method FROM payments_method WHERE user_id = '$loggedUserId' ");
+						$result = $connection->query("SELECT method, id FROM payments_method WHERE user_id = '$loggedUserId' ");
 						$_SESSION['loggedUserPaymentMethods'] = [];
-						while($row = $result->fetch_row())
+						while($row = $result->fetch_assoc())
 						{
-							array_push($_SESSION['loggedUserPaymentMethods'],$row[0]);
+							array_push($_SESSION['loggedUserPaymentMethods'],$row);
 						}
 						$result->close();
 						
