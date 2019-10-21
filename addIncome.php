@@ -9,13 +9,15 @@
 	{
 		$_SESSION['e_incomeAmount'] = "";
 		$_SESSION['e_incomeDate'] = "";
+		$_SESSION['e_incomeComment'] = "";
 		$loggedUserId = $_SESSION['loggedUserId'];
 		$all_ok = true;
 		
+		$categoryId = $_POST['incomeCategoryId'];
+		
 		$amount = $_POST['incomeAmount'];
 		str_replace(',', '.', $amount);
-		$date = $_POST['incomeDate'];
-		$categoryId = $_POST['incomeCategoryId'];
+
 		
 		//Amount validation
 		if($amount<0 || $amount >999999.99)
@@ -41,10 +43,10 @@
 			$all_ok=false;
 			$_SESSION['e_incomeAmount'] = "Nieprawidłowy format kwoty";
 		}
-		
-		
-		
+
+
 		//Date validation
+		$date = $_POST['incomeDate'];
 		$testDate  = explode('-', $date); //rok0, miesiac1, dzien2
 		if (!(count($testDate) == 3))
 		{
@@ -61,6 +63,22 @@
 		}
 		
 		
+		//Comment validation
+		$comment = $_POST['incomeComment'];
+		$commentClean = strip_tags($_POST['incomeComment']);
+		
+		if(strlen($comment)>100)
+		{
+			$all_ok=false;
+			$_SESSION['e_incomeComment'] = "Komentarz może posiadać maksymalnie 100 znaków";
+		}
+		if($commentClean != $comment)
+		{
+			$all_ok=false;
+			$_SESSION['e_incomeComment'] = "Komentarz musi składać się tylko z liter i cyfr";
+		}
+
+		
 		if($all_ok)
 		{
 			require_once "connect.php";
@@ -76,7 +94,7 @@
 				}
 				else
 				{
-					if($connection->query("INSERT INTO incomes VALUES (NULL, '$loggedUserId', '$date', '$categoryId', '$amount', ' ')"))
+					if($connection->query("INSERT INTO incomes VALUES (NULL, '$loggedUserId', '$date', '$categoryId', '$amount', '$comment')"))
 					{
 						echo "Dodano przychód";
 					}
@@ -113,5 +131,7 @@
 	}
 		$("#addIncomeAmountFeedback").html("<?php echo $_SESSION['e_incomeAmount']; ?>");
 		$("#addIncomeDateFeedback").html("<?php echo $_SESSION['e_incomeDate']; ?>");
+		$("#addIncomeCommentFeedback").html("<?php echo $_SESSION['e_incomeComment']; ?>");
+		
 
 </script>

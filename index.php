@@ -108,10 +108,12 @@
 				var incomeAmount = $("#incomeAmount").val();
 				var incomeDate = $("#incomeDate").val();
 				var incomeCategoryId = $("#incomeCategoryId").val();
+				var incomeComment = $("#incomeComment").val();
 				$("#addIncomeFormMessage").load("addIncome.php", {
 					incomeAmount: incomeAmount,
 					incomeDate: incomeDate,
-					incomeCategoryId: incomeCategoryId
+					incomeCategoryId: incomeCategoryId,
+					incomeComment: incomeComment
 				});
 			});
 		});
@@ -313,7 +315,15 @@
 										?>
 										</select>
 									</div>
-								</div>			
+								</div>	
+								
+								<div class="form-group  row">
+									<label for="incomeComment" class="col-sm-4 col-form-label">Komentarz</label>
+									<div class="col-sm-8">
+										<textarea class="form-control" rows = "3" id="incomeComment" name="incomeComment"></textarea>
+										<small class = "text-danger" id="addIncomeCommentFeedback"></small>
+									</div>
+								</div>								
 								
 								<div id="addIncomeFormMessage" class="text-danger"></div>
 								<button type="submit" class="btn btn-outline-secondary float-right mr-2">Dodaj</button>
