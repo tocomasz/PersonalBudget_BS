@@ -55,7 +55,7 @@
 		
 		$(document).ready(function(){
 			$("#customPeriodModalClose").click(function(){
-				$("#datePeriod").val("przedzial");
+				$("#datePeriod").val("currentMonth");
 			});
 		});
 		
@@ -146,6 +146,35 @@
 					$("#expenseDate").val('');
 					$("#expenseComment").val('');
 				}, 2000);
+			});
+		});
+		
+		$(document).ready(function(){
+			$("#customPeriodBalance").submit(function(event){
+				event.preventDefault();
+				var startDate = $("#startDate").val();
+				var endDate = $("#endDate").val();
+				$("#balanceResults").load("balance.php", {
+					startDate: startDate,
+					endDate: endDate
+				});
+			});
+		});
+		
+		$(document).ready(function(){
+			$("#defaultPeriodBalance").submit(function(event){
+				event.preventDefault();
+				var datePeriod = $("#datePeriod").val();
+				$("#balanceResults").load("balance.php", {
+					datePeriod: datePeriod
+				});
+			});
+		});
+		
+				
+		$(document).ready(function(){
+			$("#cancelBalanceResults").click(function(){
+				$("#balanceResults").html('');
 			});
 		});
 
@@ -300,7 +329,7 @@
 				</nav>
 			
 				<!--Main content -->
-				<div class="col-8 bg-light rounded-lg shadow-lg pt-4">
+				<div class="col-8 bg-light rounded-lg shadow-lg py-4">
 				
 					<div class="tab-content">
 					
@@ -433,25 +462,27 @@
 						<div class="tab-pane container fade" id="balance">
 						
 							<h1 class="display2 text-center">Bilans przychodów i wydatków</h1><hr>
-							
-							<form>
+							<h4 class="display2 d-none">Przychody</h4>
+							<div id="balanceResults">
+							</div>
+							<form id="defaultPeriodBalance" action="balance.php" method="post" novalidate>
 							
 								<div class="form-group  row">
 									<label for="datePeriod" class="col-sm-4 col-form-label">Przedział bilansu</label>
 									<div class="col-sm-8">
 										<select name="datePeriod" class="custom-select" id="datePeriod">
-											<option selected value="przedzial">Przedział bilansu</option>
-											<option value="biezacy">Bieżący miesiąc</option>
-											<option value="poprzedni">Poprzedni miesiąc</option>
-											<option value="rok">Bieżący rok</option>
+											<option value="currentMonth">Bieżący miesiąc</option>
+											<option value="lastMonth">Poprzedni miesiąc</option>
+											<option value="currentYear">Bieżący rok</option>
 											<option value="niestandardowy">Niestandardowy</option>
 										</select>
 									</div>
 								</div>
-							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Anuluj</button>
+							<button type="reset" class="btn btn-outline-secondary float-right mr-2" id="cancelBalanceResults">Anuluj</button>
 							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Pokaż bilans</button>									
 							</form>
 						</div>
+						
 						<div class="tab-pane container fade" id="settings">
 							4
 						</div>
@@ -467,16 +498,16 @@
 					
 						<div class="modal-header">
 							<h4 class="modal-title">Wybierz zakres dat</h4>
-							<button type="button" class="close" data-dismiss="modal" id="customPeriodModalClose">&times;</button>
 						</div>
 
 						<div class="modal-body">
 						
-							<form>
+							<form id="customPeriodBalance" action="balance.php" method="post" novalidate>
 								<div class="form-group row">
 									<label for="startDate" class="col-sm-5 col-form-label">Data początkowa</label>
 									<div class="col-sm-7">
 										<input type="date" class="form-control" id="startDate">
+										<small class = "text-danger" id="startDateFeedback"></small>
 									</div>
 								</div>
 								
@@ -484,10 +515,12 @@
 									<label for="endDate" class="col-sm-5 col-form-label">Data końcowa</label>
 									<div class="col-sm-7">
 										<input type="date" class="form-control" id="endDate">
+										<small class = "text-danger" id="endDateFeedback"></small>
 									</div>
 								</div>
-								<button type="submit" class="btn btn-outline-secondary float-right">Wybierz</button>
-								
+								<button type="submit" class="btn btn-outline-secondary float-right mr-2" data-dismiss="modal" id="customPeriodModalClose">Anuluj</button>
+								<button type="submit" class="btn btn-outline-secondary float-right mr-2">Pokaż bilans</button>
+
 							</form>
 							
 						</div>
