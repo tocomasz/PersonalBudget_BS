@@ -154,11 +154,10 @@
 				event.preventDefault();
 				var startDate = $("#startDate").val();
 				var endDate = $("#endDate").val();
-				$("#balance").load("balance.php", {
+				$("#balanceResults").load("balance.php", {
 					startDate: startDate,
 					endDate: endDate
 				});
-				
 			});
 		});
 		
@@ -166,9 +165,16 @@
 			$("#defaultPeriodBalance").submit(function(event){
 				event.preventDefault();
 				var datePeriod = $("#datePeriod").val();
-				$("#balance").load("balance.php", {
+				$("#balanceResults").load("balance.php", {
 					datePeriod: datePeriod
 				});
+			});
+		});
+		
+				
+		$(document).ready(function(){
+			$("#cancelBalanceResults").click(function(){
+				$("#balanceResults").html('');
 			});
 		});
 
@@ -323,7 +329,7 @@
 				</nav>
 			
 				<!--Main content -->
-				<div class="col-8 bg-light rounded-lg shadow-lg pt-4">
+				<div class="col-8 bg-light rounded-lg shadow-lg py-4">
 				
 					<div class="tab-content">
 					
@@ -456,7 +462,9 @@
 						<div class="tab-pane container fade" id="balance">
 						
 							<h1 class="display2 text-center">Bilans przychodów i wydatków</h1><hr>
-							
+							<h4 class="display2 d-none">Przychody</h4>
+							<div id="balanceResults">
+							</div>
 							<form id="defaultPeriodBalance" action="balance.php" method="post" novalidate>
 							
 								<div class="form-group  row">
@@ -470,10 +478,11 @@
 										</select>
 									</div>
 								</div>
-							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Anuluj</button>
+							<button type="reset" class="btn btn-outline-secondary float-right mr-2" id="cancelBalanceResults">Anuluj</button>
 							<button type="submit" class="btn btn-outline-secondary float-right mr-2">Pokaż bilans</button>									
 							</form>
 						</div>
+						
 						<div class="tab-pane container fade" id="settings">
 							4
 						</div>
