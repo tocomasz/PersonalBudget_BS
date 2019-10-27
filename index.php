@@ -361,7 +361,7 @@
 								</div>
 								
 								<div class="form-group  row">
-									<label for="incomeCategory" class="col-sm-4 col-form-label">Kategoria</label>
+									<label for="incomeCategoryId" class="col-sm-4 col-form-label">Kategoria</label>
 									<div class="col-sm-8">
 										<select id="incomeCategoryId" name ="incomeCategory" class="custom-select">
 										<?php
@@ -413,7 +413,7 @@
 								</div>
 								
 								<div class="form-group  row">
-									<label for="expenseForm" class="col-sm-4 col-form-label">Rodzaj płatności</label>
+									<label for="expensePaymentMethodId" class="col-sm-4 col-form-label">Rodzaj płatności</label>
 									<div class="col-sm-8">
 										<select id="expensePaymentMethodId" name="paymentMethodId" class="custom-select">
 										<?php
@@ -430,7 +430,7 @@
 								</div>		
 
 								<div class="form-group  row">
-									<label for="expenseCategory" class="col-sm-4 col-form-label">Kategoria</label>
+									<label for="expenseCategoryId" class="col-sm-4 col-form-label">Kategoria</label>
 									<div class="col-sm-8">
 										<select id="expenseCategoryId" name="expenseCategoryId" class="custom-select">
 											<?php
@@ -447,7 +447,7 @@
 								</div>		
 								
 								<div class="form-group  row">
-									<label for="expenseComment=" class="col-sm-4 col-form-label">Komentarz</label>
+									<label for="expenseComment" class="col-sm-4 col-form-label">Komentarz</label>
 									<div class="col-sm-8">
 										<textarea class="form-control" rows = "3" id="expenseComment" name="expenseComment"></textarea>
 										<small class = "text-danger" id="addExpenseCommentFeedback"></small>
