@@ -106,6 +106,7 @@
 					}
 				}
 				
+				$connection->close();
 			}
 			catch(Exception $e)
 			{

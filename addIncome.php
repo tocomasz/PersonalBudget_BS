@@ -104,7 +104,7 @@
 						throw new Exception($connection->error);
 					}
 				}
-				
+				$connection->close();
 			}
 			catch(Exception $e)
 			{
