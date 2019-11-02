@@ -37,7 +37,7 @@
 			{
 				$("#welcomeMessage").html("Witaj!");
 				$("#instructionMessage").html("Zaloguj się do swojego konta lub załóż nowe aby móc korzystać z opcji dodawania/usuwania przychodów oraz przeglądania bilansu");
-				$("#mainNavbar").html("<li><button class='btn btn-secondary ml-auto mr-2' id='changeTabToLogin'> Zaloguj się</button></li><li><button class='btn btn-secondary ml-auto mr-5' id='changeTabToRegister'> Zarejestruj się</button></li>");
+				$("#mainNavbar").html("<li><button class='btn btn-secondary ml-auto mr-2' id='changeTabToLogin'> Zaloguj się</button></li><li><button class='btn btn-secondary ml-auto mr-3' id='changeTabToRegister'> Zarejestruj się</button></li>");
 				$("#addIncomePill").addClass("disabled");
 				$("#addExpensePill").addClass("disabled");
 				$("#balancePill").addClass("disabled");
@@ -183,10 +183,14 @@
 	  
 	 <body>
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-			<a class="navbar-brand mr-auto ml-5" href="index.php"><i class="fas fa-piggy-bank"></i></a>
-			
-			<ul class="navbar-nav ml-auto" id="mainNavbar">
-			</ul>
+			<a class="navbar-brand mr-auto ml-3" href="index.php"><i class="fas fa-piggy-bank"></i></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-auto" id="mainNavbar">
+				</ul>
+			</div>
 			
 		</nav>
 		
@@ -289,7 +293,7 @@
 		
 		 <!-- Main page -->
 		<div class="container mt-4">
-			<div class="row">
+			<div class="row no-gutters">
 			
 				<!-- Navigation bar -->
 				<nav class="col-4">

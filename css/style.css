@@ -5,6 +5,8 @@ body
 	
 }
 
+
+
 .container .nav-item
 {
 	height:120px;
@@ -12,13 +14,36 @@ body
 	text-align: center;
 	margin-bottom: 10px;
 	text-transform: lowercase;
-	font-size:15px;
+
+}
+@media screen and (max-width: 576px)
+ {
+	.container .nav-item
+	{
+		font-size:12px;
+	}
+	.display2
+	{
+		font-size:18px;
+	}
+}
+@media screen and (min-width: 577px)
+ {
+	.container .nav-item
+	{
+		font-size:15px;
+	}
+	.display2
+	{
+		font-size:30px;
+	}
 }
 .container .nav-link
 {
 
 	background-color: #747474;
 	height:100%;
+	width:100%;
 	color:white;
 	border: 1px solid black;
 }
