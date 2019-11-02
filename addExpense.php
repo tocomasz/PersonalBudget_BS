@@ -120,19 +120,26 @@
 
 <script>
 	var all_ok = "<?php echo $all_ok; ?>";
+	$("#addExpenseAmountFeedback").html("<?php echo $_SESSION['e_expenseAmount']; ?>");
+	$("#addExpenseDateFeedback").html("<?php echo $_SESSION['e_expenseDate']; ?>");
+	$("#addExpenseCommentFeedback").html("<?php echo $_SESSION['e_expenseComment']; ?>");
 	
 	if (all_ok)
 	{
 		$("#addExpenseFormMessage").addClass("text-success");
 		$("#addExpenseFormMessage").removeClass("text-danger");
+		setTimeout(function(){
+			$("#addExpenseFormMessage").empty();
+			$("#expenseAmount").val('');
+			$("#expenseDate").val('');
+			$("#expenseComment").val('');
+		}, 2000);
 	}
 	else
 	{
 		$("#addExpenseFormMessage").addClass("text-danger");
 		$("#addExpenseFormMessage").removeClass("text-success");
 	}
-		$("#addExpenseAmountFeedback").html("<?php echo $_SESSION['e_expenseAmount']; ?>");
-		$("#addExpenseDateFeedback").html("<?php echo $_SESSION['e_expenseDate']; ?>");
-		$("#addExpenseCommentFeedback").html("<?php echo $_SESSION['e_expenseComment']; ?>");
+
 
 </script>

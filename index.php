@@ -114,13 +114,6 @@
 					incomeCategoryId: incomeCategoryId,
 					incomeComment: incomeComment
 				});
-				
-				setTimeout(function(){
-					$("#addIncomeFormMessage").empty();
-					$("#incomeAmount").val('');
-					$("#incomeDate").val('');
-					$("#incomeComment").val('');
-				}, 2000);
 			});
 		});
 		

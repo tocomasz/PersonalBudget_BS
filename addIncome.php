@@ -119,18 +119,26 @@
 <script>
 	var all_ok = "<?php echo $all_ok; ?>";
 	
+	$("#addIncomeAmountFeedback").html("<?php echo $_SESSION['e_incomeAmount']; ?>");
+	$("#addIncomeDateFeedback").html("<?php echo $_SESSION['e_incomeDate']; ?>");
+	$("#addIncomeCommentFeedback").html("<?php echo $_SESSION['e_incomeComment']; ?>");
+	
 	if (all_ok)
 	{
 		$("#addIncomeFormMessage").addClass("text-success");
 		$("#addIncomeFormMessage").removeClass("text-danger");
+		setTimeout(function(){
+			$("#addIncomeFormMessage").empty();
+			$("#incomeAmount").val('');
+			$("#incomeDate").val('');
+			$("#incomeComment").val('');
+		}, 2000);
 	}
 	else
 	{
 		$("#addIncomeFormMessage").addClass("text-danger");
 		$("#addIncomeFormMessage").removeClass("text-success");
 	}
-		$("#addIncomeAmountFeedback").html("<?php echo $_SESSION['e_incomeAmount']; ?>");
-		$("#addIncomeDateFeedback").html("<?php echo $_SESSION['e_incomeDate']; ?>");
-		$("#addIncomeCommentFeedback").html("<?php echo $_SESSION['e_incomeComment']; ?>");
+
 		
 </script>
