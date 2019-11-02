@@ -24,6 +24,10 @@
 			
 			if(ctype_alnum($login))
 			{
+				if(!mysqli_set_charset($connection, "utf8"))
+				{
+					throw new Exception($connection->error);
+				}
 				$result = $connection->query("SELECT * FROM users WHERE login = '$login'");
 				if(!$result) throw new Exception($connection->error);
 				$howManyUsers = $result->num_rows;
