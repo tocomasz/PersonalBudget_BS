@@ -132,13 +132,6 @@
 					expensePaymentMethodId: expensePaymentMethodId,
 					expenseComment: expenseComment
 				});
-				
-				setTimeout(function(){
-					$("#addExpenseFormMessage").empty();
-					$("#expenseAmount").val('');
-					$("#expenseDate").val('');
-					$("#expenseComment").val('');
-				}, 2000);
 			});
 		});
 		
