@@ -83,6 +83,10 @@
 			}
 			else
 			{
+				if(!mysqli_set_charset($connection, "utf8"))
+				{
+					throw new Exception($connection->error);
+				}
 				$result = $connection->query("SELECT date, amount, category FROM incomes, incomes_category WHERE incomes.user_id = '$loggedUserId' AND incomes.category_id = incomes_category.id AND date BETWEEN '$startDate' AND '$endDate' ORDER BY date DESC");
 				if(!$result) throw new Exception($connection->error);
 				$_SESSION['loggedUserIncomes'] = [];
