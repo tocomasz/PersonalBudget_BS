@@ -64,6 +64,10 @@
 		try
 		{
 			$connection = new mysqli($host, $db_user, $db_password, $db_name);
+			if(!mysqli_set_charset($connection, "utf8"))
+			{
+				throw new Exception($connection->error);
+			}
 			if($connection->connect_errno!=0)
 			{
 				throw new Exception(mysqli_connect_errno());
